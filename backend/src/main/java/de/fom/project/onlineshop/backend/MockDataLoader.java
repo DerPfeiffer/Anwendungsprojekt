@@ -5,7 +5,9 @@ import de.fom.project.onlineshop.backend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MockDataLoader implements ApplicationRunner {
 
     private ProductRepository productRepository;
@@ -18,7 +20,6 @@ public class MockDataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         productRepository.save(new ProductDao("Toilettenpapier"));
         productRepository.save(new ProductDao("Bachlorarbeit"));
-
     }
 
 }
