@@ -19,7 +19,16 @@ public class MockDataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) {
         productRepository.save(new ProductDao("Toilettenpapier"));
-        productRepository.save(new ProductDao("Bachlorarbeit"));
+        productRepository.save(new ProductDao("Milch"));
+        productRepository.save(new ProductDao("Käse"));
+        productRepository.save(new ProductDao("Salami"));
+        productRepository.save(new ProductDao("Quark"));
+        productRepository.save(new ProductDao("Headset"));
+        productRepository.save(new ProductDao("Blumenerde"));
+        productRepository.save(new ProductDao("Buntstifte"));
+        productRepository.save(new ProductDao("Whiteboard-Marker"));
+        productRepository.save(new ProductDao("Schwamm"));
+        productRepository.save(new ProductDao("Schreibtisch"));
     }
 
 }
