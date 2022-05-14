@@ -1,34 +1,53 @@
 package de.fom.project.onlineshop.backend;
 
-import de.fom.project.onlineshop.backend.model.ProductDao;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.fom.project.onlineshop.backend.model.Producer;
+import de.fom.project.onlineshop.backend.model.Product;
+import de.fom.project.onlineshop.backend.repository.ProducerRepository;
 import de.fom.project.onlineshop.backend.repository.ProductRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.List;
 
 @Component
 public class MockDataLoader implements ApplicationRunner {
+    private Logger LOG = LoggerFactory.getLogger(MockDataLoader.class);
 
     private ProductRepository productRepository;
+    private ProducerRepository producerRepository;
+    private ObjectMapper mapper = new ObjectMapper();
+    @Value("classpath:mockData.json")
+    private Resource mockDataFile;
 
     @Autowired
-    public MockDataLoader(ProductRepository productRepository) {
+    public MockDataLoader(ProductRepository productRepository, ProducerRepository producerRepository) {
         this.productRepository = productRepository;
+        this.producerRepository = producerRepository;
     }
 
-    public void run(ApplicationArguments args) {
-        productRepository.save(new ProductDao("Toilettenpapier"));
-        productRepository.save(new ProductDao("Milch"));
-        productRepository.save(new ProductDao("Käse"));
-        productRepository.save(new ProductDao("Salami"));
-        productRepository.save(new ProductDao("Quark"));
-        productRepository.save(new ProductDao("Headset"));
-        productRepository.save(new ProductDao("Blumenerde"));
-        productRepository.save(new ProductDao("Buntstifte"));
-        productRepository.save(new ProductDao("Whiteboard-Marker"));
-        productRepository.save(new ProductDao("Schwamm"));
-        productRepository.save(new ProductDao("Schreibtisch"));
+    public void run(ApplicationArguments args) throws IOException {
+        LOG.info("Start Loading MockData");
+        List<Product> products = mapper.readValue(mockDataFile.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Product.class));
+        products.forEach(product ->  {
+            Producer producer = product.getProducer();
+            Producer producerDatabase = producerRepository.findByName(producer.getName());
+            if(producerDatabase == null) {
+                producer = producerRepository.save(producer);
+            } else {
+                product.setProducer(producerDatabase);
+            }
+
+            productRepository.save(product);
+        });
+        LOG.info("Finished Loading MockData");
     }
 
 }

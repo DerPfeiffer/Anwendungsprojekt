@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Ritzel",
+    "producer": {
+      "name": "Shimano"
+    }
+  },
+  {
+    "name": "Bremsscheibe",
+    "producer": {
+      "name": "Brembo"
+    }
+  },
+  {
+    "name": "Bremsbacke",
+    "producer": {
+      "name": "Brembo"
+    }
+  },
+  {
+    "name": "Klingel",
+    "producer": {
+      "name": "Cube"
+    }
+  },
+  {
+    "name": "Helm",
+    "producer": {
+      "name": "Alpina"
+    }
+  },
+  {
+    "name": "Portabler Computer",
+    "producer": {
+      "name": "Sigma"
+    }
+  },
+  {
+    "name": "MTB/Road Schaltzug Edelstahl silber",
+    "producer": {
+      "name": "Shimano"
+    }
+  },
+  {
+    "name": "Standard Schaltinnenzug Ø1.2x2100mm mit Endkappen",
+    "producer": {
+      "name": "Shimano"
+    }
+  },
+  {
+    "name": "Universal Schaltzug galvanisiert Kettenschaltung",
+    "producer": {
+      "name": "CLARKS"
+    }
+  },
+  {
+    "name": "Stella Akku Typ 2 36V 14.5AH Ersatz",
+    "producer": {
+      "name": "Bosch"
+    }
+  },
+  {
+    "name": "Shimano BT-E8014 Akku 36V 11.4Ah",
+    "producer": {
+      "name": "Shimano"
+    }
+  },
+  {
+    "name": "ERGON GP3 Griffe",
+    "producer": {
+      "name": "Rose"
+    }
+  },
+  {
+    "name": "ERGON GA3 Griffe",
+    "producer": {
+      "name": "Rose"
+    }
+  },
+  {
+    "name": "ERGON GP5 Griffe",
+    "producer": {
+      "name": "Rose"
+    }
+  }
+]
+
