@@ -4,3 +4,6 @@
 /backend/db/
 /backend/.mvn/
 /db/
+/frontend/node_modules/
+/frontend/.angular/
+/frontend.iml

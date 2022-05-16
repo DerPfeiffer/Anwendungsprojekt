@@ -33,7 +33,14 @@ public class MockDataLoader implements ApplicationRunner {
         this.producerRepository = producerRepository;
     }
 
+    public MockDataLoader() {
+    }
+
     public void run(ApplicationArguments args) throws IOException {
+        loadData();
+    }
+
+    public void loadData() throws IOException {
         LOG.info("Start Loading MockData");
         List<Product> products = mapper.readValue(mockDataFile.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Product.class));
         products.forEach(product ->  {
@@ -48,6 +55,12 @@ public class MockDataLoader implements ApplicationRunner {
             productRepository.save(product);
         });
         LOG.info("Finished Loading MockData");
+
     }
 
+    public void deleteData() {
+        LOG.info("Deleting Data!");
+        productRepository.deleteAll();
+        producerRepository.deleteAll();
+    }
 }

@@ -1,5 +1,6 @@
 package de.fom.project.onlineshop.backend.service;
 
+import de.fom.project.onlineshop.backend.model.Producer;
 import de.fom.project.onlineshop.backend.model.Product;
 import de.fom.project.onlineshop.backend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,10 @@ public class ProductService {
 
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    public void deleteByProducer(Producer producer) {
+        repository.deleteByProducer(producer);
     }
 
 }

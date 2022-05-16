@@ -1,0 +1,12 @@
+<h2>Ändern eines Produzenten</h2>
+<form>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="producer.name" name="name">
+  </mat-form-field>
+</form>
+
+<div fxLayout>
+  <button mat-button (click)="submit()" fxFlex="50%">Speichern</button>
+  <button mat-button (click)="cancel()" fxFlex="50%">Abbrechen</button>
+</div>

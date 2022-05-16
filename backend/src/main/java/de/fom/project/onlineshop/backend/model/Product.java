@@ -1,5 +1,6 @@
 package de.fom.project.onlineshop.backend.model;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,10 +20,12 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotNull
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tutorial_id", nullable = false)
+    @NotNull
+    @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Producer producer;
 

@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+  margin: 10px;
+}
+
+.item {
+  border-radius: .2em;
+  padding: 1em 1em;
+}
+
+h1 {
+  border-bottom: .1em solid grey;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.filter {
+  width: 100%;
+}
+
+
