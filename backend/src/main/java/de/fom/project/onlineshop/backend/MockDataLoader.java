@@ -24,8 +24,12 @@ public class MockDataLoader implements ApplicationRunner {
     private ProductRepository productRepository;
     private ProducerRepository producerRepository;
     private ObjectMapper mapper = new ObjectMapper();
-    @Value("classpath:mockData.json")
-    private Resource mockDataFile;
+
+    @Value("classpath:mockData/producer.json")
+    private Resource producerMockDataFile;
+
+    @Value("classpath:mockData/product.json")
+    private Resource productMockDataFile;
 
     @Autowired
     public MockDataLoader(ProductRepository productRepository, ProducerRepository producerRepository) {
@@ -42,17 +46,21 @@ public class MockDataLoader implements ApplicationRunner {
 
     public void loadData() throws IOException {
         LOG.info("Start Loading MockData");
-        List<Product> products = mapper.readValue(mockDataFile.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Product.class));
-        products.forEach(product ->  {
-            Producer producer = product.getProducer();
-            Producer producerDatabase = producerRepository.findByName(producer.getName());
-            if(producerDatabase == null) {
-                producer = producerRepository.save(producer);
-            } else {
-                product.setProducer(producerDatabase);
-            }
-            productRepository.save(product);
+
+        LOG.info("Start Loading Producer");
+        List<Producer> producer = mapper.readValue(producerMockDataFile.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Producer.class));
+        producer.forEach(producerEntity -> {
+            producerRepository.save(producerEntity);
         });
+        LOG.info("Finished Loading Producer");
+
+        LOG.info("Start Loading Product");
+        List<Product> products = mapper.readValue(productMockDataFile.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Product.class));
+        products.forEach(productEntity ->  {
+            productRepository.save(productEntity);
+        });
+        LOG.info("Finished Loading Product");
+
         LOG.info("Finished Loading MockData");
 
     }

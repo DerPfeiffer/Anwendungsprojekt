@@ -1,99 +1,113 @@
 [
   {
+    "id": 9,
     "name": "Ritzel",
     "producer": {
-      "name": "Shimano"
+      "id": 7
     },
     "price": "3.90"
   },
   {
+    "id": 10,
     "name": "Bremsscheibe",
     "producer": {
-      "name": "Brembo"
+      "id": 3
     },
     "price": "14.95"
   },
   {
+    "id": 11,
     "name": "Bremsbacke",
     "producer": {
-      "name": "Brembo"
+      "id": 3
     },
     "price": "8.95"
   },
   {
+    "id": 12,
     "name": "Klingel",
     "producer": {
-      "name": "Cube"
+      "id": 5
     },
     "price": "3.95"
   },
   {
+    "id": 13,
     "name": "Helm",
     "producer": {
-      "name": "Alpina"
+      "id": 1
     },
     "price": "112.95"
   },
   {
+    "id": 14,
     "name": "Portabler Computer",
     "producer": {
-      "name": "Sigma"
+      "id": 8
     },
     "price": "18.95"
   },
   {
+    "id": 15,
     "name": "MTB/Road Schaltzug Edelstahl silber",
     "producer": {
-      "name": "Shimano"
+      "id": 7
     },
     "price": "4.95"
   },
   {
+    "id": 16,
     "name": "Standard Schaltinnenzug Ø1.2x2100mm mit Endkappen",
     "producer": {
-      "name": "Shimano"
+      "id": 7
     },
     "price": "1.95"
   },
   {
+    "id": 17,
     "name": "Universal Schaltzug galvanisiert Kettenschaltung",
     "producer": {
-      "name": "CLARKS"
+      "id": 4
     },
     "price": "2.99"
   },
   {
+    "id": 18,
     "name": "Stella Akku Typ 2 36V 14.5AH Ersatz",
     "producer": {
-      "name": "Bosch"
+      "id": 2
     },
     "price": "319.00"
   },
   {
+    "id": 19,
     "name": "Shimano BT-E8014 Akku 36V 11.4Ah",
     "producer": {
-      "name": "Shimano"
+      "id": 7
     },
     "price": "349.00"
   },
   {
+    "id": 20,
     "name": "ERGON GP3 Griffe",
     "producer": {
-      "name": "Rose"
+      "id": 6
     },
     "price": "59.95"
   },
   {
+    "id": 21,
     "name": "ERGON GA3 Griffe",
     "producer": {
-      "name": "Rose"
+      "id": 6
     },
     "price": "34.95"
   },
   {
+    "id": 22,
     "name": "ERGON GP5 Griffe",
     "producer": {
-      "name": "Rose"
+      "id": 6
     },
     "price": "53.95"
   }
