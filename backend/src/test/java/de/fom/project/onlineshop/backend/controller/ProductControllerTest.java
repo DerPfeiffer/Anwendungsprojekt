@@ -28,12 +28,14 @@ public class ProductControllerTest {
 
     @Test
     public void get(){
-        String id = "2";
+        String id = "11";
         Product product = controller.get(id);
 
         assertThat(product.getId()).isEqualTo(Long.valueOf(id));
-        assertThat(product.getName()).isEqualTo("Ritzel");
+        assertThat(product.getName()).isEqualTo("Bremsbacke");
         assertThat(product.getProducer()).isNotNull();
+        assertThat(product.getProducer().getId()).isEqualTo(3L);
+        assertThat(product.getProducer().getName()).isEqualTo("Brembo");
     }
 
     @Test
@@ -51,7 +53,7 @@ public class ProductControllerTest {
 
     @Test
     public void post() {
-        String id = "2";
+        String id = "11";
         String newName = "Helm";
 
         Product product = controller.get(id);
@@ -62,7 +64,7 @@ public class ProductControllerTest {
 
     @Test
     public void delete() {
-        String id = "2";
+        String id = "11";
         controller.delete(id);
 
         assertThat(controller.get(id)).isNull();

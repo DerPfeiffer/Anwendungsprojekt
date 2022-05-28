@@ -3,8 +3,10 @@ package de.fom.project.onlineshop.backend;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fom.project.onlineshop.backend.model.Producer;
 import de.fom.project.onlineshop.backend.model.Product;
+import de.fom.project.onlineshop.backend.model.Stock;
 import de.fom.project.onlineshop.backend.repository.ProducerRepository;
 import de.fom.project.onlineshop.backend.repository.ProductRepository;
+import de.fom.project.onlineshop.backend.repository.StockRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +21,12 @@ import java.util.List;
 
 @Component
 public class MockDataLoader implements ApplicationRunner {
-    private Logger LOG = LoggerFactory.getLogger(MockDataLoader.class);
+    private final Logger LOG = LoggerFactory.getLogger(MockDataLoader.class);
 
     private ProductRepository productRepository;
     private ProducerRepository producerRepository;
-    private ObjectMapper mapper = new ObjectMapper();
+    private StockRepository stockRepository;
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Value("classpath:mockData/producer.json")
     private Resource producerMockDataFile;
@@ -31,10 +34,14 @@ public class MockDataLoader implements ApplicationRunner {
     @Value("classpath:mockData/product.json")
     private Resource productMockDataFile;
 
+    @Value("classpath:mockData/stock.json")
+    private Resource stockMockDataFile;
+
     @Autowired
-    public MockDataLoader(ProductRepository productRepository, ProducerRepository producerRepository) {
+    public MockDataLoader(ProductRepository productRepository, ProducerRepository producerRepository, StockRepository stockRepository) {
         this.productRepository = productRepository;
         this.producerRepository = producerRepository;
+        this.stockRepository = stockRepository;
     }
 
     public MockDataLoader() {
@@ -49,17 +56,19 @@ public class MockDataLoader implements ApplicationRunner {
 
         LOG.info("Start Loading Producer");
         List<Producer> producer = mapper.readValue(producerMockDataFile.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Producer.class));
-        producer.forEach(producerEntity -> {
-            producerRepository.save(producerEntity);
-        });
+        producerRepository.saveAll(producer);
         LOG.info("Finished Loading Producer");
 
         LOG.info("Start Loading Product");
         List<Product> products = mapper.readValue(productMockDataFile.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Product.class));
-        products.forEach(productEntity ->  {
-            productRepository.save(productEntity);
-        });
+        productRepository.saveAll(products);
         LOG.info("Finished Loading Product");
+
+        LOG.info("Start Loading Stock");
+        List<Stock> stocks = mapper.readValue(stockMockDataFile.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Stock.class));
+        stockRepository.saveAll(stocks);
+        LOG.info("Finished Loading Stock");
+
 
         LOG.info("Finished Loading MockData");
 

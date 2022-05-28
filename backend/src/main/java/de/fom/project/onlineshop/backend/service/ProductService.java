@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
 
-    private ProductRepository repository;
-    private ProducerService producerService;
+    private final ProductRepository repository;
+    private final ProducerService producerService;
 
     @Autowired
     ProductService(ProductRepository repository, ProducerService producerService) {
@@ -26,12 +25,7 @@ public class ProductService {
     }
 
     public Product get(long id) {
-        Optional<Product> productOptional = repository.findById(id);
-        if (productOptional.isPresent()) {
-            return productOptional.get();
-        } else {
-            return null;
-        }
+        return repository.findById(id).orElse(null);
     }
 
     public Product put(String name, double price, long producerId) {

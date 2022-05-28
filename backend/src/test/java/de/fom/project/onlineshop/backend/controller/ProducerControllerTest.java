@@ -31,7 +31,7 @@ public class ProducerControllerTest {
         Producer producer = controller.get(id);
 
         assertThat(producer.getId()).isEqualTo(Long.valueOf(id));
-        assertThat(producer.getName()).isEqualTo("Shimano");
+        assertThat(producer.getName()).isEqualTo("Alpina");
     }
 
     @Test

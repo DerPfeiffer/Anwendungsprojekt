@@ -13,21 +13,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RestControllerEndpoint(id = "addons")
 public class ActuatorCustomEndpoints {
 
-    private MockDataLoader dataLoader;
+    private final MockDataLoader dataLoader;
     
     @Autowired
     ActuatorCustomEndpoints(MockDataLoader dataLoader){
         this.dataLoader = dataLoader;
     }
     
+    @SuppressWarnings("rawtypes")
     @PostMapping("/resetData")
     public @ResponseBody ResponseEntity resetData() {
         try {
             dataLoader.deleteData();
             dataLoader.loadData();
-            return new ResponseEntity<>("Data resetted", HttpStatus.OK);
+            return new ResponseEntity<>("Data reset successfully", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Data could not be resetted. Error occured:" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Data reset couldn't be executed. Error:" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

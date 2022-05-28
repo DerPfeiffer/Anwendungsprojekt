@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("${rest.mapping.producer.base}")
 public class ProducerController {
 
-    private ProducerService service;
+    private final ProducerService service;
 
     @Autowired
     ProducerController(ProducerService service) {
@@ -25,7 +25,7 @@ public class ProducerController {
 
     @GetMapping
     public Producer get(@RequestParam String id) {
-        Long idParsed = Long.valueOf(id);
+        long idParsed = Long.parseLong(id);
 
         return service.get(idParsed);
     }
@@ -37,14 +37,14 @@ public class ProducerController {
 
     @PostMapping
     public Producer post(@RequestParam String id, @RequestParam String name) {
-        Long idParsed = Long.valueOf(id);
+        long idParsed = Long.parseLong(id);
 
         return service.post(idParsed, name);
     }
 
     @DeleteMapping
     public void delete(@RequestParam String id) {
-        Long idParsed = Long.valueOf(id);
+        long idParsed = Long.parseLong(id);
 
         service.delete(idParsed);
     }

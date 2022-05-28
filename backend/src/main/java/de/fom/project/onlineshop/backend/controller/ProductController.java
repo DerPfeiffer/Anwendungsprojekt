@@ -12,8 +12,8 @@ import java.util.List;
 @RequestMapping("${rest.mapping.product.base}")
 public class ProductController {
 
-    private ProductService service;
-    private ProducerController producerController;
+    private final ProductService service;
+    private final ProducerController producerController;
 
     @Autowired
     public ProductController(ProductService service, ProducerController producerController) {
@@ -28,23 +28,23 @@ public class ProductController {
 
     @GetMapping
     public Product get(@RequestParam String id) {
-        Long idParsed = Long.valueOf(id);
+        long idParsed = Long.parseLong(id);
 
         return service.get(idParsed);
     }
 
     @PutMapping
     public Product put(@RequestParam String name, @RequestParam String price, @RequestParam String producerId) {
-        Double priceParsed = Double.valueOf(price);
-        Long producerIdParsed = Long.valueOf(producerId);
+        double priceParsed = Double.parseDouble(price);
+        long producerIdParsed = Long.parseLong(producerId);
 
         return service.put(name, priceParsed, producerIdParsed);
     }
 
     @PostMapping
     public Product post(@RequestParam String id, @RequestParam String name, @RequestParam String price, @RequestParam String producerId) {
-        Long idParsed = Long.valueOf(id);
-        Double priceParsed = Double.valueOf(price);
+        long idParsed = Long.parseLong(id);
+        double priceParsed = Double.parseDouble(price);
         Producer producer = producerController.get(producerId);
 
         return service.post(idParsed, name, priceParsed, producer);
@@ -52,7 +52,7 @@ public class ProductController {
 
     @DeleteMapping
     public void delete(@RequestParam String id) {
-        Long idParsed = Long.valueOf(id);
+        long idParsed = Long.parseLong(id);
 
         service.delete(idParsed);
     }

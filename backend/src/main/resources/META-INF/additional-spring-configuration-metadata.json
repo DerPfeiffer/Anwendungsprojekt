@@ -1,0 +1,34 @@
+{
+  "properties": [
+    {
+      "name": "rest.mapping.product.base",
+      "type": "java.lang.String",
+      "description": "Base of requestmapping for products."
+    },
+    {
+      "name": "rest.mapping.product.getAll",
+      "type": "java.lang.String",
+      "description": "Path for the method 'getAll' for products."
+    },
+    {
+      "name": "rest.mapping.producer.base",
+      "type": "java.lang.String",
+      "description": "Base of requestmapping for producer."
+    },
+    {
+      "name": "rest.mapping.producer.getAll",
+      "type": "java.lang.String",
+      "description": "Path for the method 'getAll' for producer."
+    },
+    {
+      "name": "rest.mapping.stock.base",
+      "type": "java.lang.String",
+      "description": "Base of requestmapping for stocks."
+    },
+    {
+      "name": "rest.mapping.stock.getAll",
+      "type": "java.lang.String",
+      "description": "Path for the method 'getAll' for stocks."
+    }
+  ]
+}

@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProducerService {
 
-    private ProducerRepository repository;
+    private final ProducerRepository repository;
 
     @Autowired
     ProducerService(ProducerRepository repository) {
@@ -27,12 +26,7 @@ public class ProducerService {
     }
 
     public Producer get(long id) {
-        Optional<Producer> optionalProducer = repository.findById(id);
-        if(optionalProducer.isPresent()) {
-            return optionalProducer.get();
-        } else {
-            return null;
-        }
+        return repository.findById(id).orElse(null);
     }
 
     public Producer put(String name) {
