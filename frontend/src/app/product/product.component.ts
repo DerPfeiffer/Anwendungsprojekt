@@ -11,19 +11,22 @@ import {ProductService} from "../service/product.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {DeleteProducerComponent} from "../producer/dialog/delete-producer/delete-producer.component";
 import {DeleteProductComponent} from "./dialog/delete-product/delete-product.component";
+import {_isNumberValue} from "@angular/cdk/coercion";
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
+
 export class ProductComponent implements AfterViewInit {
 
   clickEventSubscription: Subscription;
 
-  products: Product[] = [];
+  key = "id";
+  products: Product [] = [];
   dataSource = new MatTableDataSource(this.products);
-  displayedColumns: string[] = ['id','name', 'price', 'actions'];
+  displayedColumns: string[] = ['id','name', 'price', 'producer.name', 'actions'];
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
   @ViewChild('dialogRef') dialogRef!: TemplateRef<any>;
 
@@ -33,10 +36,6 @@ export class ProductComponent implements AfterViewInit {
     })
   }
 
-  test() {
-    console.log("Aufgerufen");
-  }
-
   ngAfterViewInit(): void {
     this.getAllProducts();
   }
@@ -44,13 +43,28 @@ export class ProductComponent implements AfterViewInit {
   getAllProducts() {
     this._service.getAll().subscribe(data => {
       this.products = data;
-      this.updateDataSource(data);
+      this.updateDataSource();
     });
   }
 
-  updateDataSource(producer: Producer[]) {
+  updateDataSource() {
     this.dataSource.data = this.products;
     this.dataSource.sort = this.sort;
+
+    this.dataSource.filterPredicate = (data, filter) => {
+      return data.id == parseInt(filter) ||
+        data.name.toLocaleLowerCase().includes(filter) ||
+        data.price == parseFloat(filter) ||
+        data.producer.name.toLocaleLowerCase().includes(filter);
+    };
+
+    this.dataSource.sortingDataAccessor = (data: Product, sortHeaderId: string): string | number => {
+      const propPath = sortHeaderId.split('.');
+      const value: any = propPath
+        // @ts-ignore
+        .reduce((curObj, property) => curObj[property], data);
+      return !isNaN(value) ? Number(value) : value;
+    };
   }
 
   applyFilter(event: Event) {
@@ -71,5 +85,9 @@ export class ProductComponent implements AfterViewInit {
 
   updateProduct(product: Product) {
     alert("TBD")
+  }
+
+  parseFloat(price: any) {
+    return  parseFloat(price).toFixed(2);
   }
 }

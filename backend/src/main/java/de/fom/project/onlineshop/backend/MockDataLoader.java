@@ -51,7 +51,6 @@ public class MockDataLoader implements ApplicationRunner {
             } else {
                 product.setProducer(producerDatabase);
             }
-
             productRepository.save(product);
         });
         LOG.info("Finished Loading MockData");

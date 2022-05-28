@@ -39,7 +39,8 @@
     "producer": {
       "name": "Sigma"
     },
-    "price": "18.95"  },
+    "price": "18.95"
+  },
   {
     "name": "MTB/Road Schaltzug Edelstahl silber",
     "producer": {
@@ -66,14 +67,14 @@
     "producer": {
       "name": "Bosch"
     },
-    "price": "319"
+    "price": "319.00"
   },
   {
     "name": "Shimano BT-E8014 Akku 36V 11.4Ah",
     "producer": {
       "name": "Shimano"
     },
-    "price": "349"
+    "price": "349.00"
   },
   {
     "name": "ERGON GP3 Griffe",
