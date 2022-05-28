@@ -24,8 +24,10 @@ public class ProducerController {
     }
 
     @GetMapping
-    public Producer get (@RequestParam String id) {
-        return service.get(Long.valueOf(id));
+    public Producer get(@RequestParam String id) {
+        Long idParsed = Long.valueOf(id);
+
+        return service.get(idParsed);
     }
 
     @PutMapping
@@ -35,11 +37,15 @@ public class ProducerController {
 
     @PostMapping
     public Producer post(@RequestParam String id, @RequestParam String name) {
-        return service.post(Long.valueOf(id), name);
+        Long idParsed = Long.valueOf(id);
+
+        return service.post(idParsed, name);
     }
 
     @DeleteMapping
     public void delete(@RequestParam String id) {
-        service.delete(Long.valueOf(id));
+        Long idParsed = Long.valueOf(id);
+
+        service.delete(idParsed);
     }
 }

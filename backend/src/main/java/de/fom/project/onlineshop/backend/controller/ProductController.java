@@ -1,5 +1,6 @@
 package de.fom.project.onlineshop.backend.controller;
 
+import de.fom.project.onlineshop.backend.model.Producer;
 import de.fom.project.onlineshop.backend.model.Product;
 import de.fom.project.onlineshop.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,33 +13,47 @@ import java.util.List;
 public class ProductController {
 
     private ProductService service;
+    private ProducerController producerController;
 
-    public ProductController(@Autowired ProductService service) {
+    @Autowired
+    public ProductController(ProductService service, ProducerController producerController) {
         this.service = service;
+        this.producerController = producerController;
     }
 
     @GetMapping("${rest.mapping.product.getAll}")
     public List<Product> getAllProducts() {
         return service.getAll();
     }
-    
+
     @GetMapping
-    public Product get (@RequestParam String id) {
-        return service.get(Long.valueOf(id));
+    public Product get(@RequestParam String id) {
+        Long idParsed = Long.valueOf(id);
+
+        return service.get(idParsed);
     }
 
     @PutMapping
     public Product put(@RequestParam String name, @RequestParam String price, @RequestParam String producerId) {
-        return service.put(name, price, producerId);
+        Double priceParsed = Double.valueOf(price);
+        Long producerIdParsed = Long.valueOf(producerId);
+
+        return service.put(name, priceParsed, producerIdParsed);
     }
 
     @PostMapping
     public Product post(@RequestParam String id, @RequestParam String name, @RequestParam String price, @RequestParam String producerId) {
-        return service.post(Long.valueOf(id), name, price, Long.valueOf(producerId));
+        Long idParsed = Long.valueOf(id);
+        Double priceParsed = Double.valueOf(price);
+        Producer producer = producerController.get(producerId);
+
+        return service.post(idParsed, name, priceParsed, producer);
     }
 
     @DeleteMapping
     public void delete(@RequestParam String id) {
-        service.delete(Long.valueOf(id));
+        Long idParsed = Long.valueOf(id);
+
+        service.delete(idParsed);
     }
 }

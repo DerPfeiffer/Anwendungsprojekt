@@ -18,7 +18,7 @@ public class ProducerService {
         this.repository = repository;
     }
 
-    public Producer getProducer(Long id) {
+    public Producer getProducer(long id) {
         return repository.getById(id);
     }
 
@@ -26,7 +26,7 @@ public class ProducerService {
         return repository.findAll();
     }
 
-    public Producer get(Long id) {
+    public Producer get(long id) {
         Optional<Producer> optionalProducer = repository.findById(id);
         if(optionalProducer.isPresent()) {
             return optionalProducer.get();
@@ -39,11 +39,14 @@ public class ProducerService {
         return repository.save(new Producer(name));
     }
 
-    public Producer post(Long id, String name) {
-        return repository.save(new Producer(id, name));
+    public Producer post(long id, String name) {
+        Producer producer = get(id);
+        producer.setName(name);
+
+        return repository.save(producer);
     }
 
-    public void delete(Long id) {
+    public void delete(long id) {
         repository.deleteById(id);
     }
 }

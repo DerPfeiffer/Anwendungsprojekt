@@ -25,7 +25,7 @@ public class ProductService {
         return repository.findAll();
     }
 
-    public Product get(Long id) {
+    public Product get(long id) {
         Optional<Product> productOptional = repository.findById(id);
         if (productOptional.isPresent()) {
             return productOptional.get();
@@ -34,20 +34,23 @@ public class ProductService {
         }
     }
 
-    public Product put(String name, String price, String producerId) {
-        return repository.save(new Product(name, Double.valueOf(price), producerService.getProducer(Long.valueOf(producerId))));
+    public Product put(String name, double price, long producerId) {
+        Producer producer = producerService.getProducer(producerId);
+
+        return repository.save(new Product(name, price, producer));
     }
 
-    public Product post(Long id, String name, String price, Long producerId) {
-        return repository.save(new Product(id, name, Double.valueOf(price), producerService.getProducer(producerId)));
+    public Product post(long id, String name, double price, Producer producer) {
+        Product product = get(id);
+        product.setName(name);
+        product.setPrice(price);
+        product.setProducer(producer);
+
+        return repository.save(product);
     }
 
-    public void delete(Long id) {
+    public void delete(long id) {
         repository.deleteById(id);
-    }
-
-    public void deleteByProducer(Producer producer) {
-        repository.deleteByProducer(producer);
     }
 
 }
