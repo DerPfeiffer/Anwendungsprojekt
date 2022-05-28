@@ -39,12 +39,14 @@ public class ProductControllerTest {
     @Test
     public void put() {
         String name = "Neues Item";
+        String price = "2.99";
         String producerId = "1";
-        Product neues_item = controller.put(name, producerId);
+        Product neues_item = controller.put(name, price, producerId);
         Product product = controller.get(String.valueOf(neues_item.getId()));
 
         assertThat(product).isNotNull();
         assertThat(neues_item.getName()).isEqualTo(product.getName());
+        assertThat(neues_item.getPrice()).isEqualTo(product.getPrice());
     }
 
     @Test
@@ -54,7 +56,7 @@ public class ProductControllerTest {
 
         Product product = controller.get(id);
         product.setName(newName);
-        controller.post(product.getId().toString(), product.getName(), product.getProducer().getId().toString());
+        controller.post(product.getId().toString(), product.getName(), String.valueOf(product.getPrice()), product.getProducer().getId().toString());
         assertThat(controller.get(id).getName()).isEqualTo(newName);
     }
 

@@ -25,12 +25,16 @@ public class Product {
     private String name;
 
     @NotNull
+    private double price;
+
+    @NotNull
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Producer producer;
 
-    public Product(String name, Producer producer) {
+    public Product(String name, double price, Producer producer) {
         this.name = name;
+        this.price = price;
         this.producer = producer;
     }
 }

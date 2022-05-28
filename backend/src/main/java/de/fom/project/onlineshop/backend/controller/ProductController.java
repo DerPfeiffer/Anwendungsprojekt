@@ -28,13 +28,13 @@ public class ProductController {
     }
 
     @PutMapping
-    public Product put(@RequestParam String name, @RequestParam String producerId) {
-        return service.put(name, producerId);
+    public Product put(@RequestParam String name, @RequestParam String price, @RequestParam String producerId) {
+        return service.put(name, price, producerId);
     }
 
     @PostMapping
-    public Product post(@RequestParam String id, @RequestParam String name, @RequestParam String producerId) {
-        return service.post(Long.valueOf(id), name, Long.valueOf(producerId));
+    public Product post(@RequestParam String id, @RequestParam String name, @RequestParam String price, @RequestParam String producerId) {
+        return service.post(Long.valueOf(id), name, price, Long.valueOf(producerId));
     }
 
     @DeleteMapping

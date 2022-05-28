@@ -23,7 +23,7 @@ export class ProductComponent implements AfterViewInit {
 
   products: Product[] = [];
   dataSource = new MatTableDataSource(this.products);
-  displayedColumns: string[] = ['id','name', 'actions'];
+  displayedColumns: string[] = ['id','name', 'price', 'actions'];
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
   @ViewChild('dialogRef') dialogRef!: TemplateRef<any>;
 

@@ -3,85 +3,98 @@
     "name": "Ritzel",
     "producer": {
       "name": "Shimano"
-    }
+    },
+    "price": "3.90"
   },
   {
     "name": "Bremsscheibe",
     "producer": {
       "name": "Brembo"
-    }
+    },
+    "price": "14.95"
   },
   {
     "name": "Bremsbacke",
     "producer": {
       "name": "Brembo"
-    }
+    },
+    "price": "8.95"
   },
   {
     "name": "Klingel",
     "producer": {
       "name": "Cube"
-    }
+    },
+    "price": "3.95"
   },
   {
     "name": "Helm",
     "producer": {
       "name": "Alpina"
-    }
+    },
+    "price": "112.95"
   },
   {
     "name": "Portabler Computer",
     "producer": {
       "name": "Sigma"
-    }
-  },
+    },
+    "price": "18.95"  },
   {
     "name": "MTB/Road Schaltzug Edelstahl silber",
     "producer": {
       "name": "Shimano"
-    }
+    },
+    "price": "4.95"
   },
   {
     "name": "Standard Schaltinnenzug Ø1.2x2100mm mit Endkappen",
     "producer": {
       "name": "Shimano"
-    }
+    },
+    "price": "1.95"
   },
   {
     "name": "Universal Schaltzug galvanisiert Kettenschaltung",
     "producer": {
       "name": "CLARKS"
-    }
+    },
+    "price": "2.99"
   },
   {
     "name": "Stella Akku Typ 2 36V 14.5AH Ersatz",
     "producer": {
       "name": "Bosch"
-    }
+    },
+    "price": "319"
   },
   {
     "name": "Shimano BT-E8014 Akku 36V 11.4Ah",
     "producer": {
       "name": "Shimano"
-    }
+    },
+    "price": "349"
   },
   {
     "name": "ERGON GP3 Griffe",
     "producer": {
       "name": "Rose"
-    }
+    },
+    "price": "59.95"
   },
   {
     "name": "ERGON GA3 Griffe",
     "producer": {
       "name": "Rose"
-    }
+    },
+    "price": "34.95"
   },
   {
     "name": "ERGON GP5 Griffe",
     "producer": {
       "name": "Rose"
-    }
+    },
+    "price": "53.95"
   }
 ]
 

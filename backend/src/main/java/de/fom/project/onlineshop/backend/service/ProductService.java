@@ -34,12 +34,12 @@ public class ProductService {
         }
     }
 
-    public Product put(String name, String producerId) {
-        return repository.save(new Product(name, producerService.getProducer(Long.valueOf(producerId))));
+    public Product put(String name, String price, String producerId) {
+        return repository.save(new Product(name, Double.valueOf(price), producerService.getProducer(Long.valueOf(producerId))));
     }
 
-    public Product post(Long id, String name, Long producerId) {
-        return repository.save(new Product(id, name, producerService.getProducer(producerId)));
+    public Product post(Long id, String name, String price, Long producerId) {
+        return repository.save(new Product(id, name, Double.valueOf(price), producerService.getProducer(producerId)));
     }
 
     public void delete(Long id) {
