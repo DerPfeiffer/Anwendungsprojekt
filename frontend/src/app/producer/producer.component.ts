@@ -23,7 +23,7 @@ export class ProducerComponent implements AfterViewInit {
 
   producer: Producer[] = [];
   dataSource = new MatTableDataSource(this.producer);
-  displayedColumns: string[] = ['name', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'actions'];
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
   @ViewChild('deleteDialog') deleteDialog!: TemplateRef<any>;
   @ViewChild('createDialog') createDialog!: TemplateRef<any>;
