@@ -1,20 +1,20 @@
-<h2>Anlage eines Produkts</h2>
+<h2>Ändern eines Produkts</h2>
 <form>
   <mat-form-field>
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="product.name" name="name">
+    <input matInput [(ngModel)]="input.product.name" name="name">
   </mat-form-field>
 </form>
 <mat-form-field>
   <mat-label>Preis</mat-label>
-  <input matInput [(ngModel)]="product.price" type="number" placeholder="0.00" name="preis">
+  <input matInput [(ngModel)]="input.product.price" type="number" placeholder="0.00" name="preis">
   <span matPrefix>€&nbsp;</span>
 </mat-form-field>
 
 <mat-form-field>
   <mat-label>Produzent</mat-label>
-  <mat-select [(ngModel)]="product.producer">
-    <mat-option *ngFor="let producer of input" [value]="producer">
+  <mat-select [(ngModel)]="input.product.producer.id">
+    <mat-option *ngFor="let producer of input.producer" [value]="producer.id">
       {{producer.name}}
     </mat-option>
   </mat-select>

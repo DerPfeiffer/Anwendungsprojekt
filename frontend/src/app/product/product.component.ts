@@ -9,6 +9,7 @@ import {ProductService} from "../service/product.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteProductComponent} from "./dialog/delete-product/delete-product.component";
 import {CreateProductComponent} from "./dialog/create-product/create-product.component";
+import {UpdateProductComponent} from "./dialog/update-product/update-product.component";
 
 @Component({
   selector: 'app-product',
@@ -94,7 +95,16 @@ export class ProductComponent implements AfterViewInit {
   }
 
   updateProduct(product: Product) {
-    alert("TBD")
+    this._producerService.getAll().subscribe(data => {
+      const dialog = this._dialog.open(UpdateProductComponent, {data: {producer: data, product: product}});
+      dialog.afterClosed().subscribe((res) => {
+        if (res.event == "yes") {
+          this._service.put(res.product).subscribe(() => {
+            this.getAllProducts();
+          })
+        }
+      })
+    });
   }
 
   parseFloat(price: any) {
