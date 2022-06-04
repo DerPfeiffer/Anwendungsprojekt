@@ -78,5 +78,6 @@ public class MockDataLoader implements ApplicationRunner {
         LOG.info("Deleting Data!");
         productRepository.deleteAll();
         producerRepository.deleteAll();
+        stockRepository.deleteAll();
     }
 }
