@@ -26,8 +26,13 @@ import {UpdateProductComponent} from "./product/dialog/update-product/update-pro
 import {StockComponent} from './stock/stock.component';
 import {MatPaginatorIntl, MatPaginatorModule} from "@angular/material/paginator";
 import {CustomMatPaginatorIntl} from './utils/CustomMatPaginatorIntl';
+import {registerLocaleData} from "@angular/common";
+import localeDe from '@angular/common/locales/de';
+import localeDeExtra from '@angular/common/locales/extra/de';
 
 export const HTTP_BASE_URL = "http://localhost:8080/"
+
+registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
 @NgModule({
   declarations: [

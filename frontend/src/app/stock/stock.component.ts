@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {Stock} from "../interface/stock";
 import {StockService} from "../service/stock.service";
 import {MatPaginator} from "@angular/material/paginator";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-stock',
@@ -16,6 +17,9 @@ import {MatPaginator} from "@angular/material/paginator";
 export class StockComponent implements AfterViewInit {
 
   clickEventSubscription: Subscription;
+
+  dateFormat = "dd.MM.yyyy hh:mm:ss";
+  locale = 'de-DE';
 
   key = "id";
   stock: Stock [] = [];
@@ -36,6 +40,10 @@ export class StockComponent implements AfterViewInit {
 
   getStock() {
     this._service.getAll().subscribe(data => {
+      data.forEach(entry => {
+        entry.lastIncoming = new Date(entry.lastIncoming);
+        entry.lastOutgoing = new Date(entry.lastOutgoing);
+      })
       this.stock = data;
       this.updateDataSource();
     });
@@ -89,10 +97,10 @@ export class StockComponent implements AfterViewInit {
         matches = data.floor == parseInt(filterValue);
         break;
       case "letzter wareneingang":
-        matches = data.lastIncoming.toString().includes(filterValue);
+        matches = formatDate(data.lastIncoming, this.dateFormat, this.locale).toString().includes(filterValue);
         break;
       case "letzter warenausgang":
-        matches = data.lastOutgoing.toString().includes(filterValue);
+        matches = formatDate(data.lastOutgoing, this.dateFormat, this.locale).toString().includes(filterValue);
         break;
       default:
         matches =
@@ -116,5 +124,9 @@ export class StockComponent implements AfterViewInit {
 
   createStockEntry() {
 
+  }
+
+  formatDate(lastIncoming: any) {
+   return formatDate(lastIncoming, this.dateFormat, this.locale);
   }
 }

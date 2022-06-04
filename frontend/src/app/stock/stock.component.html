@@ -45,12 +45,12 @@
 
       <ng-container matColumnDef="lastIncoming">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Letzter Wareneingang</th>
-        <td mat-cell *matCellDef="let stockEntry">{{stockEntry.lastIncoming}}</td>
+        <td mat-cell *matCellDef="let stockEntry">{{formatDate(stockEntry.lastIncoming)}}</td>
       </ng-container>
 
       <ng-container matColumnDef="lastOutgoing">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Letzter Warenausgang</th>
-        <td mat-cell *matCellDef="let stockEntry">{{stockEntry.lastOutgoing}}</td>
+        <td mat-cell *matCellDef="let stockEntry">{{formatDate(stockEntry.lastOutgoing)}}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
