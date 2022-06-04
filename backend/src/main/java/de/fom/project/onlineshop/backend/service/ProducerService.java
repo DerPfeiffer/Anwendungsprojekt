@@ -17,10 +17,6 @@ public class ProducerService {
         this.repository = repository;
     }
 
-    public Producer getProducer(long id) {
-        return repository.getById(id);
-    }
-
     public List<Producer> getAll() {
         return repository.findAll();
     }

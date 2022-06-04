@@ -1,17 +1,14 @@
-import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {SharedService} from "../service/shared.service";
 import {Subscription} from "rxjs";
-import {Producer} from "../interface/producer";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {ProducerService} from "../service/producer.service";
-import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {Product} from "../interface/product";
 import {ProductService} from "../service/product.service";
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {DeleteProducerComponent} from "../producer/dialog/delete-producer/delete-producer.component";
+import {MatDialog} from "@angular/material/dialog";
 import {DeleteProductComponent} from "./dialog/delete-product/delete-product.component";
-import {_isNumberValue} from "@angular/cdk/coercion";
+import {CreateProductComponent} from "./dialog/create-product/create-product.component";
 
 @Component({
   selector: 'app-product',
@@ -26,11 +23,10 @@ export class ProductComponent implements AfterViewInit {
   key = "id";
   products: Product [] = [];
   dataSource = new MatTableDataSource(this.products);
-  displayedColumns: string[] = ['id','name', 'price', 'producer.name', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'price', 'producer.name', 'actions'];
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
-  @ViewChild('dialogRef') dialogRef!: TemplateRef<any>;
 
-  constructor(private _sharedService: SharedService, private _service: ProductService, private _dialog: MatDialog) {
+  constructor(private _sharedService: SharedService, private _service: ProductService, private _producerService: ProducerService, private _dialog: MatDialog) {
     this.clickEventSubscription = this._sharedService.getReloadProductsEvent().subscribe(() => {
       this.getAllProducts();
     })
@@ -72,6 +68,20 @@ export class ProductComponent implements AfterViewInit {
     this.dataSource.filter = filter.trim().toLowerCase();
   }
 
+
+  createProduct() {
+    this._producerService.getAll().subscribe(data => {
+      const dialog = this._dialog.open(CreateProductComponent, {data: data});
+      dialog.afterClosed().subscribe((res) => {
+        if (res.event == "yes") {
+          this._service.put(res.product).subscribe(() => {
+            this.getAllProducts();
+          })
+        }
+      })
+    });
+  }
+
   deleteProduct(product: Product) {
     const dialog = this._dialog.open(DeleteProductComponent, {data: product});
     dialog.afterClosed().subscribe((res) => {
@@ -88,6 +98,7 @@ export class ProductComponent implements AfterViewInit {
   }
 
   parseFloat(price: any) {
-    return  parseFloat(price).toFixed(2);
+    return parseFloat(price).toFixed(2);
   }
+
 }

@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HTTP_BASE_URL} from "../app.module";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Producer} from "../interface/producer";
 import {Product} from "../interface/product";
 
 @Injectable({
@@ -24,8 +23,12 @@ export class ProductService {
     return this.http.delete(this.base + "?" + query);
   }
 
+  put(product: Product): Observable<any> {
+    const query = "name=" + product.name + "&price=" + product.price + "&producerId=" + product.producer;
+    return this.http.put(this.base + "?" + query, {});
+  }
+
   //TODO single??
-  //TODO put
   //TODO post
 
 }

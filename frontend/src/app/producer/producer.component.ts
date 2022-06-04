@@ -1,12 +1,10 @@
-import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {ProducerService} from "../service/producer.service";
 import {Producer} from "../interface/producer";
 import {MatTableDataSource} from "@angular/material/table";
-import {MatSort, Sort} from "@angular/material/sort";
-import {LiveAnnouncer} from "@angular/cdk/a11y";
-import {ProductComponent} from "../product/product.component";
+import {MatSort} from "@angular/material/sort";
 import {SharedService} from "../service/shared.service";
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {CreateProducerComponent} from "./dialog/create-producer/create-producer.component";
 import {DeleteProducerComponent} from "./dialog/delete-producer/delete-producer.component";
 import {Subscription} from "rxjs";
@@ -25,8 +23,6 @@ export class ProducerComponent implements AfterViewInit {
   dataSource = new MatTableDataSource(this.producer);
   displayedColumns: string[] = ['id', 'name', 'actions'];
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
-  @ViewChild('deleteDialog') deleteDialog!: TemplateRef<any>;
-  @ViewChild('createDialog') createDialog!: TemplateRef<any>;
 
   constructor(private _sharedService: SharedService, private _service: ProducerService, private _dialog: MatDialog) {
     this.clickEventSubscription = this._sharedService.getReloadProductsEvent().subscribe(() => {
@@ -56,22 +52,22 @@ export class ProducerComponent implements AfterViewInit {
     this.dataSource.filter = filter.trim().toLowerCase();
   }
 
-  deleteProducer(producer: Producer) {
-    const dialog = this._dialog.open(DeleteProducerComponent, {data: producer});
+  createProducer() {
+    const dialog = this._dialog.open(CreateProducerComponent);
     dialog.afterClosed().subscribe((res) => {
       if (res.event == "yes") {
-        this._service.delete(producer).subscribe(() => {
+        this._service.put(res.producer).subscribe(() => {
           this._sharedService.sendReloadProductsEvent();
         })
       }
     })
   }
 
-  createProducer() {
-    const dialog = this._dialog.open(CreateProducerComponent);
+  deleteProducer(producer: Producer) {
+    const dialog = this._dialog.open(DeleteProducerComponent, {data: producer});
     dialog.afterClosed().subscribe((res) => {
       if (res.event == "yes") {
-        this._service.put(res.producer).subscribe(() => {
+        this._service.delete(producer).subscribe(() => {
           this._sharedService.sendReloadProductsEvent();
         })
       }

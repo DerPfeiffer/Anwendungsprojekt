@@ -3,6 +3,11 @@
     <h1>Produkte</h1>
   </div>
   <div>
+    <button mat-raised-button (click)="createProduct()" class="demo-button">
+      Produkt hinzufügen
+    </button>
+  </div>
+  <div>
     <mat-form-field appearance="standard" class="filter">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" #input>

@@ -29,7 +29,7 @@ public class ProductService {
     }
 
     public Product put(String name, double price, long producerId) {
-        Producer producer = producerService.getProducer(producerId);
+        Producer producer = producerService.get(producerId);
 
         return repository.save(new Product(name, price, producer));
     }

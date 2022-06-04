@@ -1,26 +1,27 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { ProducerComponent } from './producer/producer.component';
+import {AppComponent} from './app.component';
+import {ProducerComponent} from './producer/producer.component';
 import {HttpClientModule} from "@angular/common/http";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatSliderModule} from "@angular/material/slider";
-import { ProductComponent } from './product/product.component';
+import {ProductComponent} from './product/product.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
-import { CreateProducerComponent } from './producer/dialog/create-producer/create-producer.component';
-import { DeleteProducerComponent } from './producer/dialog/delete-producer/delete-producer.component';
-import { DeleteProductComponent } from './product/dialog/delete-product/delete-product.component';
+import {CreateProducerComponent} from './producer/dialog/create-producer/create-producer.component';
+import {DeleteProducerComponent} from './producer/dialog/delete-producer/delete-producer.component';
+import {DeleteProductComponent} from './product/dialog/delete-product/delete-product.component';
 import {FormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
-import { UpdateProducerComponent } from './producer/dialog/update-producer/update-producer.component';
+import {UpdateProducerComponent} from './producer/dialog/update-producer/update-producer.component';
+import {CreateProductComponent} from './product/dialog/create-product/create-product.component';
 
 export const HTTP_BASE_URL = "http://localhost:8080/"
 
@@ -32,7 +33,8 @@ export const HTTP_BASE_URL = "http://localhost:8080/"
     CreateProducerComponent,
     DeleteProducerComponent,
     DeleteProductComponent,
-    UpdateProducerComponent
+    UpdateProducerComponent,
+    CreateProductComponent
   ],
   imports: [
     BrowserModule,
