@@ -6,6 +6,7 @@ import {SharedService} from "../service/shared.service";
 import {MatDialog} from "@angular/material/dialog";
 import {Stock} from "../interface/stock";
 import {StockService} from "../service/stock.service";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-stock',
@@ -20,6 +21,7 @@ export class StockComponent implements AfterViewInit {
   stock: Stock [] = [];
   dataSource = new MatTableDataSource(this.stock);
   displayedColumns: string[] = ['id', 'product', 'amount', 'shelf', 'floor', 'lastIncoming', 'lastOutgoing'];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
   constructor(private _sharedService: SharedService, private _service: StockService, private _dialog: MatDialog) {
@@ -41,6 +43,7 @@ export class StockComponent implements AfterViewInit {
 
   updateDataSource() {
     this.dataSource.data = this.stock;
+    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
     this.dataSource.filterPredicate = (data, filter) => {

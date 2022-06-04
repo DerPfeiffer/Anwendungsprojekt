@@ -9,6 +9,7 @@ import {CreateProducerComponent} from "./dialog/create-producer/create-producer.
 import {DeleteProducerComponent} from "./dialog/delete-producer/delete-producer.component";
 import {Subscription} from "rxjs";
 import {UpdateProducerComponent} from "./dialog/update-producer/update-producer.component";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-producer',
@@ -17,12 +18,12 @@ import {UpdateProducerComponent} from "./dialog/update-producer/update-producer.
 })
 export class ProducerComponent implements AfterViewInit {
 
-  private clickEventSubscription: Subscription;
-
   producer: Producer[] = [];
   dataSource = new MatTableDataSource(this.producer);
   displayedColumns: string[] = ['id', 'name', 'actions'];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
+  private clickEventSubscription: Subscription;
 
   constructor(private _sharedService: SharedService, private _service: ProducerService, private _dialog: MatDialog) {
     this.clickEventSubscription = this._sharedService.getReloadProductsEvent().subscribe(() => {
@@ -44,6 +45,7 @@ export class ProducerComponent implements AfterViewInit {
 
   updateDataSource() {
     this.dataSource.data = this.producer;
+    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 

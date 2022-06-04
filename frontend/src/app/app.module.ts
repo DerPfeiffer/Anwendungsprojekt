@@ -23,7 +23,9 @@ import {MatSelectModule} from "@angular/material/select";
 import {UpdateProducerComponent} from './producer/dialog/update-producer/update-producer.component';
 import {CreateProductComponent} from './product/dialog/create-product/create-product.component';
 import {UpdateProductComponent} from "./product/dialog/update-product/update-product.component";
-import { StockComponent } from './stock/stock.component';
+import {StockComponent} from './stock/stock.component';
+import {MatPaginatorIntl, MatPaginatorModule} from "@angular/material/paginator";
+import {CustomMatPaginatorIntl} from './utils/CustomMatPaginatorIntl';
 
 export const HTTP_BASE_URL = "http://localhost:8080/"
 
@@ -54,10 +56,15 @@ export const HTTP_BASE_URL = "http://localhost:8080/"
     MatDialogModule,
     MatButtonModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule
   ],
-  providers: [],
+  providers: [{
+    provide: MatPaginatorIntl,
+    useClass: CustomMatPaginatorIntl
+  }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

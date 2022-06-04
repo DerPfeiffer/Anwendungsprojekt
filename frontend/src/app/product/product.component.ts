@@ -10,6 +10,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DeleteProductComponent} from "./dialog/delete-product/delete-product.component";
 import {CreateProductComponent} from "./dialog/create-product/create-product.component";
 import {UpdateProductComponent} from "./dialog/update-product/update-product.component";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-product',
@@ -25,6 +26,7 @@ export class ProductComponent implements AfterViewInit {
   products: Product [] = [];
   dataSource = new MatTableDataSource(this.products);
   displayedColumns: string[] = ['id', 'name', 'price', 'producer.name', 'actions'];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
   constructor(private _sharedService: SharedService, private _service: ProductService, private _producerService: ProducerService, private _dialog: MatDialog) {
@@ -46,6 +48,7 @@ export class ProductComponent implements AfterViewInit {
 
   updateDataSource() {
     this.dataSource.data = this.products;
+    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
     this.dataSource.filterPredicate = (data, filter) => {
