@@ -13,7 +13,7 @@
 
   <mat-form-field>
     <mat-label>Produzent</mat-label>
-    <mat-select [(ngModel)]="input.product.producer.id" name="producergit c">
+    <mat-select [(ngModel)]="input.product.producer.id" name="producer">
       <mat-option *ngFor="let producer of input.producer" [value]="producer.id">
         {{producer.name}}
       </mat-option>

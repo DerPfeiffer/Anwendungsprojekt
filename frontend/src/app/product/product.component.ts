@@ -99,7 +99,7 @@ export class ProductComponent implements AfterViewInit {
       const dialog = this._dialog.open(UpdateProductComponent, {data: {producer: data, product: product}});
       dialog.afterClosed().subscribe((res) => {
         if (res.event == "yes") {
-          this._service.put(res.product).subscribe(() => {
+          this._service.post(res.product).subscribe(() => {
             this.getAllProducts();
           })
         }
