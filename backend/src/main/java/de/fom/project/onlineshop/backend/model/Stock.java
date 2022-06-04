@@ -26,7 +26,7 @@ public class Stock {
     private int amount;
 
     @NotNull
-    private Timestamp lastIncomming;
+    private Timestamp lastIncoming;
 
     @NotNull
     private Timestamp lastOutgoing;
@@ -42,9 +42,9 @@ public class Stock {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Product product;
 
-    public Stock(int amount, Timestamp lastIncomming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
+    public Stock(int amount, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
         this.amount = amount;
-        this.lastIncomming = lastIncomming;
+        this.lastIncoming = lastIncoming;
         this.lastOutgoing = lastOutgoing;
         this.shelf = shelf;
         this.floor = floor;

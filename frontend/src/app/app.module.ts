@@ -23,6 +23,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {UpdateProducerComponent} from './producer/dialog/update-producer/update-producer.component';
 import {CreateProductComponent} from './product/dialog/create-product/create-product.component';
 import {UpdateProductComponent} from "./product/dialog/update-product/update-product.component";
+import { StockComponent } from './stock/stock.component';
 
 export const HTTP_BASE_URL = "http://localhost:8080/"
 
@@ -36,7 +37,8 @@ export const HTTP_BASE_URL = "http://localhost:8080/"
     DeleteProductComponent,
     UpdateProducerComponent,
     CreateProductComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    StockComponent
   ],
   imports: [
     BrowserModule,

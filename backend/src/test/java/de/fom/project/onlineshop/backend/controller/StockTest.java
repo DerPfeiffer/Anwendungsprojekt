@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.text.ParseException;
-import java.sql.Timestamp;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -39,7 +38,7 @@ public class StockTest {
         assertThat(stock.getId()).isEqualTo(Long.valueOf(id));
         assertThat(stock.getAmount()).isEqualTo(10);
         assertThat(stock.getFloor()).isEqualTo(1);
-        assertThat(stock.getLastIncomming()).isEqualTo(DateUtil.stringToDate("2022-05-28T21:38:44+0000"));
+        assertThat(stock.getLastIncoming()).isEqualTo(DateUtil.stringToDate("2022-05-28T21:38:44+0000"));
         assertThat(stock.getLastOutgoing()).isEqualTo(DateUtil.stringToDate("2022-05-29T21:38:44+0000"));
         assertThat(stock.getShelf()).isEqualTo(1);
         assertThat(stock.getProduct().getId()).isEqualTo(9L);
@@ -53,7 +52,7 @@ public class StockTest {
         assertThat(stock).isNotNull();
         assertThat(neues_item.getAmount()).isEqualTo(stock.getAmount());
         assertThat(neues_item.getFloor()).isEqualTo(stock.getFloor());
-        assertThat(neues_item.getLastIncomming()).isEqualTo(stock.getLastIncomming());
+        assertThat(neues_item.getLastIncoming()).isEqualTo(stock.getLastIncoming());
         assertThat(neues_item.getLastOutgoing()).isEqualTo(stock.getLastOutgoing());
         assertThat(neues_item.getShelf()).isEqualTo(stock.getShelf());
         assertThat(neues_item.getProduct().getId()).isEqualTo(stock.getProduct().getId());

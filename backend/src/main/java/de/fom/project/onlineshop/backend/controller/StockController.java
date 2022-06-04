@@ -38,29 +38,29 @@ public class StockController {
 
     @SuppressWarnings("DuplicatedCode")
     @PutMapping
-    public Stock put(@RequestParam String amount, @RequestParam String lastIncomming, @RequestParam String lastOutgoing, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
+    public Stock put(@RequestParam String amount, @RequestParam String lastIncoming, @RequestParam String lastOutgoing, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
         int amountParsed = Integer.parseInt(amount);
-        Timestamp lastIncommingParsed = DateUtil.stringToDate(lastIncomming);
+        Timestamp lastincomingParsed = DateUtil.stringToDate(lastIncoming);
         Timestamp lastOutgoingParsed = DateUtil.stringToDate(lastOutgoing);
         int shelfParsed = Integer.parseInt(shelf);
         int floorParsed = Integer.parseInt(floor);
         Product productParsed = productController.get(productId);
 
-        return service.put(amountParsed, lastIncommingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+        return service.put(amountParsed, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
     }
 
     @SuppressWarnings("DuplicatedCode")
     @PostMapping
-    public Stock post(@RequestParam String id, @RequestParam String amount, @RequestParam String lastIncomming, @RequestParam String lastOutgoing, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
+    public Stock post(@RequestParam String id, @RequestParam String amount, @RequestParam String lastIncoming, @RequestParam String lastOutgoing, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
         Long idParsed = Long.valueOf(id);
         int amountParsed = Integer.parseInt(amount);
-        Timestamp lastIncommingParsed = DateUtil.stringToDate(lastIncomming);
+        Timestamp lastincomingParsed = DateUtil.stringToDate(lastIncoming);
         Timestamp lastOutgoingParsed = DateUtil.stringToDate(lastOutgoing);
         int shelfParsed = Integer.parseInt(shelf);
         int floorParsed = Integer.parseInt(floor);
         Product productParsed = productController.get(productId);
 
-        return service.post(idParsed, amountParsed, lastIncommingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+        return service.post(idParsed, amountParsed, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
     }
 
     @DeleteMapping

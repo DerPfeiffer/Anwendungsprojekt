@@ -2,7 +2,7 @@
   {
     "id": 23,
     "amount": 10,
-    "lastIncomming": "2022-05-28T21:38:44+0000",
+    "lastIncoming": "2022-05-28T21:38:44+0000",
     "lastOutgoing": "2022-05-29T21:38:44+0000",
     "shelf": 1,
     "floor": 1,
@@ -13,7 +13,7 @@
   {
     "id": 24,
     "amount": 120,
-    "lastIncomming": "2022-05-28T15:38:44+0000",
+    "lastIncoming": "2022-05-28T15:38:44+0000",
     "lastOutgoing": "2022-05-29T16:38:44+0000",
     "shelf": 1,
     "floor": 2,
@@ -24,7 +24,7 @@
   {
     "id": 25,
     "amount": 27,
-    "lastIncomming": "2022-05-30T10:38:44+0000",
+    "lastIncoming": "2022-05-30T10:38:44+0000",
     "lastOutgoing": "2022-05-30T16:38:44+0000",
     "shelf": 1,
     "floor": 3,
@@ -35,7 +35,7 @@
   {
     "id": 26,
     "amount": 27,
-    "lastIncomming": "2022-05-27T10:38:44+0000",
+    "lastIncoming": "2022-05-27T10:38:44+0000",
     "lastOutgoing": "2022-05-30T16:38:44+0000",
     "shelf": 2,
     "floor": 1,
@@ -46,7 +46,7 @@
   {
     "id": 27,
     "amount": 17,
-    "lastIncomming": "2022-05-25T10:38:44+0000",
+    "lastIncoming": "2022-05-25T10:38:44+0000",
     "lastOutgoing": "2022-05-26T16:38:44+0000",
     "shelf": 2,
     "floor": 2,
@@ -57,7 +57,7 @@
   {
     "id": 28,
     "amount": 6,
-    "lastIncomming": "2022-05-27T10:38:44+0000",
+    "lastIncoming": "2022-05-27T10:38:44+0000",
     "lastOutgoing": "2022-05-27T11:38:44+0000",
     "shelf": 2,
     "floor": 3,
@@ -68,7 +68,7 @@
   {
     "id": 29,
     "amount": 1,
-    "lastIncomming": "2022-05-28T10:38:44+0000",
+    "lastIncoming": "2022-05-28T10:38:44+0000",
     "lastOutgoing": "2022-05-28T11:38:44+0000",
     "shelf": 3,
     "floor": 1,
@@ -79,7 +79,7 @@
   {
     "id": 30,
     "amount": 1,
-    "lastIncomming": "2022-05-28T10:38:44+0000",
+    "lastIncoming": "2022-05-28T10:38:44+0000",
     "lastOutgoing": "2022-05-29T16:38:44+0000",
     "shelf": 3,
     "floor": 2,

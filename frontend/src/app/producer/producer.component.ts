@@ -38,11 +38,11 @@ export class ProducerComponent implements AfterViewInit {
   getAllProducer() {
     this._service.getAll().subscribe(data => {
       this.producer = data;
-      this.updateDataSource(data);
+      this.updateDataSource();
     });
   }
 
-  updateDataSource(producer: Producer[]) {
+  updateDataSource() {
     this.dataSource.data = this.producer;
     this.dataSource.sort = this.sort;
   }

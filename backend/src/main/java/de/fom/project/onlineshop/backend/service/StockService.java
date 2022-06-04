@@ -28,14 +28,14 @@ public class StockService {
         return repository.findById(id).orElse(null);
     }
 
-    public Stock put(int amount, Timestamp lastIncomming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
-        return repository.save(new Stock(amount, lastIncomming, lastOutgoing, shelf, floor, product));
+    public Stock put(int amount, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
+        return repository.save(new Stock(amount, lastIncoming, lastOutgoing, shelf, floor, product));
     }
 
-    public Stock post(Long id, int amount, Timestamp lastIncomming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
+    public Stock post(Long id, int amount, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
         Stock stock = get(id);
         stock.setAmount(amount);
-        stock.setLastIncomming(lastIncomming);
+        stock.setLastIncoming(lastIncoming);
         stock.setLastOutgoing(lastOutgoing);
         stock.setShelf(shelf);
         stock.setFloor(floor);

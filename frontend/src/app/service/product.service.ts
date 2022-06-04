@@ -3,7 +3,6 @@ import {HTTP_BASE_URL} from "../app.module";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Product} from "../interface/product";
-import {Producer} from "../interface/producer";
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +32,5 @@ export class ProductService {
     const query = "id=" + product.id + "&name=" + product.name + "&price=" + product.price + "&producerId=" + product.producer.id;
     return this.http.post(this.base + "?" + query, {});
   }
-
-
-  //TODO single??
 
 }
