@@ -28,6 +28,10 @@ public class StockService {
         return repository.findById(id).orElse(null);
     }
 
+    public Stock getByProduct(Long productId) {
+        return repository.findByProductIdAndIdNot(productId, 0L).orElse(null);
+    }
+
     public Stock put(int amount, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
         return repository.save(new Stock(amount, lastIncoming, lastOutgoing, shelf, floor, product));
     }

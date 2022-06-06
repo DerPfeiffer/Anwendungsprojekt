@@ -6,14 +6,18 @@ import java.sql.Timestamp;
 
 public class DateUtil {
 
-    private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+    private final static SimpleDateFormat outFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 
     public static String dateToString(Timestamp timestamp) {
-        return formatter.format(timestamp);
+        return outFormat.format(timestamp);
     }
 
     public static Timestamp stringToDate(String dateString) throws ParseException {
-        return new Timestamp(formatter.parse(dateString).getTime());
+        if(!dateString.isEmpty()) {
+            return new Timestamp(outFormat.parse(dateString).getTime());
+        } else {
+            return null;
+        }
     }
 
 }

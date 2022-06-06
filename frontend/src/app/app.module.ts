@@ -29,6 +29,9 @@ import {CustomMatPaginatorIntl} from './utils/CustomMatPaginatorIntl';
 import {registerLocaleData} from "@angular/common";
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
+import {CreateStockComponent} from './stock/dialog/create-stock/create-stock.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 
 export const HTTP_BASE_URL = "http://localhost:8080/"
 
@@ -45,7 +48,8 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     UpdateProducerComponent,
     CreateProductComponent,
     UpdateProductComponent,
-    StockComponent
+    StockComponent,
+    CreateStockComponent
   ],
   imports: [
     BrowserModule,
@@ -62,12 +66,15 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     MatButtonModule,
     FormsModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [{
-    provide: MatPaginatorIntl,
-    useClass: CustomMatPaginatorIntl
-  }],
+  providers: [
+    {provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl},
+    MatDatepickerModule,
+    { provide: MAT_DATE_LOCALE, useValue: 'de-DE' }
+  ],
   bootstrap: [AppComponent]
 })
 

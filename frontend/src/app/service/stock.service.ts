@@ -3,6 +3,7 @@ import {HTTP_BASE_URL} from "../app.module";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Stock} from '../interface/stock';
+import DateUtils from "../utils/DateUtils";
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +25,19 @@ export class StockService {
   }
 
   put(stock: Stock): Observable<any> {
-    const query = "amount=" + stock.amount + "&lastIncoming=" + stock.lastIncoming + "&lastOutgoing=" + stock.lastOutgoing + "&shelf=" + stock.shelf + "&floor=" + stock.floor + "&productId=" + stock.product.id;
+    let incomingISO = stock.lastIncoming ? DateUtils.toIsoString(stock.lastIncoming) : "";
+    let outgoingISO = stock.lastOutgoing ? DateUtils.toIsoString(stock.lastOutgoing): "";
+
+    const query = "amount=" + stock.amount + "&thresholdAmount=" + stock.thresholdAmount + "&lastIncoming=" + incomingISO + "&lastOutgoing=" + outgoingISO + "&shelf=" + stock.shelf + "&floor=" + stock.floor + "&productId=" + stock.product.id;
     return this.http.put(this.base + "?" + query, {});
   }
 
   post(stock: Stock): Observable<any> {
-    const query = "id=" + stock.id + "&amount=" + stock.amount + "&lastIncoming=" + stock.lastIncoming + "&lastOutgoing=" + stock.lastOutgoing + "&shelf=" + stock.shelf + "&floor=" + stock.floor + "&productId=" + stock.product.id;
+    let incomingISO = stock.lastIncoming ? stock.lastIncoming.toISOString() : "";
+    let outgoingISO = stock.lastOutgoing ? stock.lastOutgoing.toISOString() : "";
+
+    const query = "id=" + stock.id + "&amount=" + stock.amount + "&thresholdAmount=" + stock.thresholdAmount + "&lastIncoming=" + incomingISO + "&lastOutgoing=" + outgoingISO + "&shelf=" + stock.shelf + "&floor=" + stock.floor + "&productId=" + stock.product.id;
+
     return this.http.post(this.base + "?" + query, {});
   }
 

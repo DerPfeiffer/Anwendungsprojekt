@@ -8,6 +8,9 @@ import {Stock} from "../interface/stock";
 import {StockService} from "../service/stock.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {formatDate} from "@angular/common";
+import {ProductService} from "../service/product.service";
+import {CreateStockComponent} from "./dialog/create-stock/create-stock.component";
+import {locale} from "moment";
 
 @Component({
   selector: 'app-stock',
@@ -20,6 +23,7 @@ export class StockComponent implements AfterViewInit {
 
   dateFormat = "dd.MM.yyyy hh:mm:ss";
   locale = 'de-DE';
+  productAlreadyDeclaredMessage = "Das Produkt ist bereits zu einem anderen Eintrag hinterlegt. Der Eintrag wurde nicht gespeichert.";
 
   key = "id";
   stock: Stock [] = [];
@@ -28,7 +32,7 @@ export class StockComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
-  constructor(private _sharedService: SharedService, private _service: StockService, private _dialog: MatDialog) {
+  constructor(private _sharedService: SharedService, private _service: StockService, private _productService: ProductService, private _dialog: MatDialog) {
     this.clickEventSubscription = this._sharedService.getReloadProductsEvent().subscribe(() => {
       this.getStock();
     })
@@ -103,10 +107,10 @@ export class StockComponent implements AfterViewInit {
         matches = data.floor == parseInt(filterValue);
         break;
       case "letzter wareneingang":
-        matches = formatDate(data.lastIncoming, this.dateFormat, this.locale).toString().includes(filterValue);
+        matches = this.formatDate(data.lastIncoming).toString().includes(filterValue);
         break;
       case "letzter warenausgang":
-        matches = formatDate(data.lastOutgoing, this.dateFormat, this.locale).toString().includes(filterValue);
+        matches = this.formatDate(data.lastOutgoing).toString().includes(filterValue);
         break;
       default:
         matches =
@@ -118,8 +122,8 @@ export class StockComponent implements AfterViewInit {
           data.shelf == parseInt(filterValue) ||
           data.floor == parseInt(filterValue) ||
           data.amount == parseInt(filterValue) ||
-          data.lastIncoming.toString().includes(filterValue) ||
-          data.lastOutgoing.toString().includes(filterValue)
+          this.formatDate(data.lastIncoming).toString().includes(filterValue) ||
+          this.formatDate(data.lastOutgoing).toString().includes(filterValue);
     }
 
     return matches;
@@ -131,14 +135,32 @@ export class StockComponent implements AfterViewInit {
   }
 
   createStockEntry() {
-    alert("TBD")
+    this._productService.getAll().subscribe(data => {
+      const dialog = this._dialog.open(CreateStockComponent, {data: data});
+      dialog.afterClosed().subscribe((res) => {
+        if (res.event == "yes") {
+          console.log(res.stock);
+          this._service.put(res.stock).subscribe(data => {
+            if(data != null) {
+              this.getStock();
+            } else {
+              alert(this.productAlreadyDeclaredMessage);
+            }
+          })
+        }
+      })
+    });
   }
 
-  formatDate(lastIncoming: any) {
-    return formatDate(lastIncoming, this.dateFormat, this.locale);
+  formatDate(date: Date) {
+   if(date.getTime() === 0) {
+     return "n.a.";
+   } else {
+     return formatDate(date, this.dateFormat, this.locale);
+   }
   }
 
-  getStockWarningPresentation(stockEntry: Stock): string {
+  getStockWarningPresentation(stockEntry: Stock) {
     return stockEntry.stockWarning ? "ja" : "nein";
   }
 }

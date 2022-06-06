@@ -7,8 +7,8 @@ import de.fom.project.onlineshop.backend.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -39,19 +39,24 @@ public class StockController {
     @SuppressWarnings("DuplicatedCode")
     @PutMapping
     public Stock put(@RequestParam String amount, @RequestParam String thresholdAmount, @RequestParam String lastIncoming, @RequestParam String lastOutgoing, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
-        int amountParsed = Integer.parseInt(amount);
-        Timestamp lastincomingParsed = DateUtil.stringToDate(lastIncoming);
-        Timestamp lastOutgoingParsed = DateUtil.stringToDate(lastOutgoing);
-        int shelfParsed = Integer.parseInt(shelf);
-        int floorParsed = Integer.parseInt(floor);
-        Product productParsed = productController.get(productId);
+        Stock stockByProduct = service.getByProduct(Long.parseLong(productId));
+        if (stockByProduct == null) {
+            int amountParsed = Integer.parseInt(amount);
+            Timestamp lastincomingParsed = DateUtil.stringToDate(lastIncoming);
+            Timestamp lastOutgoingParsed = DateUtil.stringToDate(lastOutgoing);
+            int shelfParsed = Integer.parseInt(shelf);
+            int floorParsed = Integer.parseInt(floor);
+            Product productParsed = productController.get(productId);
 
-        if(!"".equals(thresholdAmount)) {
-            int thresholdAmountParsed = Integer.parseInt(thresholdAmount);
-            boolean stockWarning = amountParsed <= thresholdAmountParsed;
-            return service.put(amountParsed, thresholdAmountParsed, stockWarning, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+            if (!"".equals(thresholdAmount)) {
+                int thresholdAmountParsed = Integer.parseInt(thresholdAmount);
+                boolean stockWarning = amountParsed <= thresholdAmountParsed;
+                return service.put(amountParsed, thresholdAmountParsed, stockWarning, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+            } else {
+                return service.put(amountParsed, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+            }
         } else {
-            return service.put(amountParsed, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+            return null;
         }
     }
 
@@ -59,19 +64,24 @@ public class StockController {
     @PostMapping
     public Stock post(@RequestParam String id, @RequestParam String amount, @RequestParam String thresholdAmount, @RequestParam String lastIncoming, @RequestParam String lastOutgoing, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
         Long idParsed = Long.valueOf(id);
-        int amountParsed = Integer.parseInt(amount);
-        Timestamp lastincomingParsed = DateUtil.stringToDate(lastIncoming);
-        Timestamp lastOutgoingParsed = DateUtil.stringToDate(lastOutgoing);
-        int shelfParsed = Integer.parseInt(shelf);
-        int floorParsed = Integer.parseInt(floor);
-        Product productParsed = productController.get(productId);
+        Stock stockByProduct = service.getByProduct(Long.parseLong(productId));
+        if (stockByProduct == null || (stockByProduct != null && stockByProduct.getId() == idParsed)) {
+            int amountParsed = Integer.parseInt(amount);
+            Timestamp lastincomingParsed = DateUtil.stringToDate(lastIncoming);
+            Timestamp lastOutgoingParsed = DateUtil.stringToDate(lastOutgoing);
+            int shelfParsed = Integer.parseInt(shelf);
+            int floorParsed = Integer.parseInt(floor);
+            Product productParsed = productController.get(productId);
 
-        if(!"".equals(thresholdAmount)) {
-            int thresholdAmountParsed = Integer.parseInt(thresholdAmount);
-            boolean stockWarning = amountParsed <= thresholdAmountParsed;
-            return service.post(idParsed, amountParsed, thresholdAmountParsed, stockWarning, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+            if (!"".equals(thresholdAmount)) {
+                int thresholdAmountParsed = Integer.parseInt(thresholdAmount);
+                boolean stockWarning = amountParsed <= thresholdAmountParsed;
+                return service.post(idParsed, amountParsed, thresholdAmountParsed, stockWarning, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+            } else {
+                return service.post(idParsed, amountParsed, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+            }
         } else {
-            return service.post(idParsed, amountParsed, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+            return null;
         }
     }
 

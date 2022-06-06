@@ -14,6 +14,7 @@ export class CreateProductComponent {
 
   constructor(public dialogRef: MatDialogRef<CreateProductComponent>,
               @Optional() @Inject(MAT_DIALOG_DATA) public input: Producer[]) {
+    input.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   submit() {

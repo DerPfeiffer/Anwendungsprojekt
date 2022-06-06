@@ -29,10 +29,8 @@ public class Stock {
 
     private boolean stockWarning;
 
-    @NotNull
     private Timestamp lastIncoming;
 
-    @NotNull
     private Timestamp lastOutgoing;
 
     @NotNull

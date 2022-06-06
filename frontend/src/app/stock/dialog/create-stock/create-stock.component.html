@@ -1,0 +1,53 @@
+<h2>Anlage eines Bestands</h2>
+<form>
+  <mat-form-field>
+    <mat-label>Produkt</mat-label>
+    <mat-select [(ngModel)]="stock.product" name="product">
+      <mat-option *ngFor="let product of input" [value]="product">
+        {{product.name}} von {{product.producer.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Bestand</mat-label>
+    <input matInput [(ngModel)]="stock.amount" type="number" placeholder="0" name="Bestand">
+    <span matSuffix> Stück</span>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Warngrenze</mat-label>
+    <input matInput [(ngModel)]="stock.thresholdAmount" type="number" placeholder="0" name="Warngrenze">
+    <span matSuffix> Stück</span>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Regal</mat-label>
+    <input matInput [(ngModel)]="stock.shelf" type="number" placeholder="0" name="Regal">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Stock</mat-label>
+    <input matInput [(ngModel)]="stock.floor" type="number" placeholder="0" name="Stock">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Letzter Wareneingang</mat-label>
+    <input matInput [matDatepicker]="lwe" [(ngModel)]="stock.lastIncoming" name="Letzter Wareneingang">
+    <mat-datepicker-toggle matSuffix [for]="lwe"></mat-datepicker-toggle>
+    <mat-datepicker #lwe></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Letzter Warenausgang</mat-label>
+    <input matInput [matDatepicker]="lwa" [(ngModel)]="stock.lastOutgoing" name="Letzter Warenausgang">
+    <mat-datepicker-toggle matSuffix [for]="lwa"></mat-datepicker-toggle>
+    <mat-datepicker #lwa></mat-datepicker>
+  </mat-form-field>
+
+
+  <div fxLayout>
+    <button mat-button (click)="submit()" fxFlex="50%">Speichern</button>
+    <button mat-button (click)="cancel()" fxFlex="50%">Abbrechen</button>
+  </div>
+</form>

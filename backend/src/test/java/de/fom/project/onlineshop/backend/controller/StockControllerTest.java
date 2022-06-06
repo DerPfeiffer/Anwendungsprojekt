@@ -14,7 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class StockTest {
+public class StockControllerTest {
 
     @Autowired
     private StockController controller;
@@ -46,7 +46,7 @@ public class StockTest {
 
     @Test
     public void put() throws ParseException {
-        Stock neues_item = controller.put("9", "","2022-05-28T21:38:44+0000", "2022-05-30T21:38:44+0000", "8", "9", String.valueOf(productController.get("9").getId()));
+        Stock neues_item = controller.put("9", "","2022-05-28T21:38:44+0000", "2022-05-30T21:38:44+0000", "8", "9", String.valueOf(productController.get("22").getId()));
         Stock stock = controller.get(String.valueOf(neues_item.getId()));
 
         assertThat(stock).isNotNull();
@@ -56,8 +56,36 @@ public class StockTest {
         assertThat(neues_item.getLastOutgoing()).isEqualTo(stock.getLastOutgoing());
         assertThat(neues_item.getShelf()).isEqualTo(stock.getShelf());
         assertThat(neues_item.getProduct().getId()).isEqualTo(stock.getProduct().getId());
-
     }
+
+    @Test
+    public void putExisting() throws ParseException {
+        Stock neues_item = controller.put("9", "","2022-05-28T21:38:44+0000", "2022-05-30T21:38:44+0000", "8", "9", String.valueOf(productController.get("9").getId()));
+        assertThat(neues_item).isNull();
+    }
+
+    @Test
+    public void post() throws ParseException {
+        Stock geaendertes_item = controller.post("24", "9", "15","2022-05-26T21:38:44+0000", "2022-05-30T21:38:44+0000", "6", "9", String.valueOf(productController.get("10").getId()));
+        Stock stock = controller.get(String.valueOf(geaendertes_item.getId()));
+
+        assertThat(stock).isNotNull();
+        assertThat(geaendertes_item.getAmount()).isEqualTo(stock.getAmount());
+        assertThat(geaendertes_item.getFloor()).isEqualTo(stock.getFloor());
+        assertThat(geaendertes_item.getLastIncoming()).isEqualTo(stock.getLastIncoming());
+        assertThat(geaendertes_item.getLastOutgoing()).isEqualTo(stock.getLastOutgoing());
+        assertThat(geaendertes_item.getShelf()).isEqualTo(stock.getShelf());
+        assertThat(geaendertes_item.getProduct().getId()).isEqualTo(stock.getProduct().getId());
+    }
+
+    @Test
+    public void postExisting() throws ParseException {
+        Stock neues_item = controller.put("9", "","2022-05-28T21:38:44+0000", "2022-05-30T21:38:44+0000", "8", "9", String.valueOf(productController.get("22").getId()));
+        Stock geaendertes_item = controller.post(neues_item.getId().toString(), "9", "","2022-05-28T21:38:44+0000", "2022-05-30T21:38:44+0000", "8", "9", String.valueOf(productController.get("9").getId()));
+        assertThat(geaendertes_item).isNull();
+    }
+
+
 
     @Test
     public void delete() {
