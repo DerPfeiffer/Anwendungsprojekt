@@ -29,8 +29,18 @@
       </ng-container>
 
       <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Preis">Bestand</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Bestand">Bestand</th>
         <td mat-cell *matCellDef="let stockEntry">{{stockEntry.amount}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="thresholdAmount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Bestandsgrenze">Warngrenze</th>
+        <td mat-cell *matCellDef="let stockEntry">{{stockEntry.thresholdAmount}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="stockWarning">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Bestandswarnung vorhanden">Bestandswarnung</th>
+        <td mat-cell *matCellDef="let stockEntry">{{getStockWarningPresentation(stockEntry)}}</td>
       </ng-container>
 
       <ng-container matColumnDef="floor">
@@ -54,7 +64,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" [class.warning]='row.thresholdAmount > row.amount'></tr>
 
       <!-- Keine Ergebnisse nach Filterung -->
       <tr class="mat-row" *matNoDataRow>

@@ -38,7 +38,7 @@ public class StockController {
 
     @SuppressWarnings("DuplicatedCode")
     @PutMapping
-    public Stock put(@RequestParam String amount, @RequestParam String lastIncoming, @RequestParam String lastOutgoing, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
+    public Stock put(@RequestParam String amount, @RequestParam String thresholdAmount, @RequestParam String lastIncoming, @RequestParam String lastOutgoing, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
         int amountParsed = Integer.parseInt(amount);
         Timestamp lastincomingParsed = DateUtil.stringToDate(lastIncoming);
         Timestamp lastOutgoingParsed = DateUtil.stringToDate(lastOutgoing);
@@ -46,12 +46,18 @@ public class StockController {
         int floorParsed = Integer.parseInt(floor);
         Product productParsed = productController.get(productId);
 
-        return service.put(amountParsed, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+        if(!"".equals(thresholdAmount)) {
+            int thresholdAmountParsed = Integer.parseInt(thresholdAmount);
+            boolean stockWarning = amountParsed <= thresholdAmountParsed;
+            return service.put(amountParsed, thresholdAmountParsed, stockWarning, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+        } else {
+            return service.put(amountParsed, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+        }
     }
 
     @SuppressWarnings("DuplicatedCode")
     @PostMapping
-    public Stock post(@RequestParam String id, @RequestParam String amount, @RequestParam String lastIncoming, @RequestParam String lastOutgoing, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
+    public Stock post(@RequestParam String id, @RequestParam String amount, @RequestParam String thresholdAmount, @RequestParam String lastIncoming, @RequestParam String lastOutgoing, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
         Long idParsed = Long.valueOf(id);
         int amountParsed = Integer.parseInt(amount);
         Timestamp lastincomingParsed = DateUtil.stringToDate(lastIncoming);
@@ -60,7 +66,13 @@ public class StockController {
         int floorParsed = Integer.parseInt(floor);
         Product productParsed = productController.get(productId);
 
-        return service.post(idParsed, amountParsed, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+        if(!"".equals(thresholdAmount)) {
+            int thresholdAmountParsed = Integer.parseInt(thresholdAmount);
+            boolean stockWarning = amountParsed <= thresholdAmountParsed;
+            return service.post(idParsed, amountParsed, thresholdAmountParsed, stockWarning, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+        } else {
+            return service.post(idParsed, amountParsed, lastincomingParsed, lastOutgoingParsed, shelfParsed, floorParsed, productParsed);
+        }
     }
 
     @DeleteMapping

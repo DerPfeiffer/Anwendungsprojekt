@@ -2,6 +2,7 @@
   {
     "id": 23,
     "amount": 10,
+    "thresholdAmount": 4,
     "lastIncoming": "2022-05-28T21:38:44+0000",
     "lastOutgoing": "2022-05-29T21:38:44+0000",
     "shelf": 1,
@@ -13,6 +14,7 @@
   {
     "id": 24,
     "amount": 120,
+    "thresholdAmount": 59,
     "lastIncoming": "2022-05-28T15:38:44+0000",
     "lastOutgoing": "2022-05-29T16:38:44+0000",
     "shelf": 1,
@@ -35,6 +37,8 @@
   {
     "id": 26,
     "amount": 27,
+    "thresholdAmount": 30,
+    "stockWarning": true,
     "lastIncoming": "2022-05-27T10:38:44+0000",
     "lastOutgoing": "2022-05-30T16:38:44+0000",
     "shelf": 2,
@@ -46,6 +50,7 @@
   {
     "id": 27,
     "amount": 17,
+    "thresholdAmount": 5,
     "lastIncoming": "2022-05-25T10:38:44+0000",
     "lastOutgoing": "2022-05-26T16:38:44+0000",
     "shelf": 2,

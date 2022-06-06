@@ -25,6 +25,10 @@ public class Stock {
     @NotNull
     private int amount;
 
+    private int thresholdAmount;
+
+    private boolean stockWarning;
+
     @NotNull
     private Timestamp lastIncoming;
 
@@ -44,6 +48,17 @@ public class Stock {
 
     public Stock(int amount, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
         this.amount = amount;
+        this.lastIncoming = lastIncoming;
+        this.lastOutgoing = lastOutgoing;
+        this.shelf = shelf;
+        this.floor = floor;
+        this.product = product;
+    }
+
+    public Stock(int amount, int thresholdAmount, boolean stockWarning, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
+        this.amount = amount;
+        this.thresholdAmount = thresholdAmount;
+        this.stockWarning = stockWarning;
         this.lastIncoming = lastIncoming;
         this.lastOutgoing = lastOutgoing;
         this.shelf = shelf;

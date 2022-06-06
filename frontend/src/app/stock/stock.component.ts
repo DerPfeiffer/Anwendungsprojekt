@@ -24,7 +24,7 @@ export class StockComponent implements AfterViewInit {
   key = "id";
   stock: Stock [] = [];
   dataSource = new MatTableDataSource(this.stock);
-  displayedColumns: string[] = ['id', 'product', 'amount', 'shelf', 'floor', 'lastIncoming', 'lastOutgoing'];
+  displayedColumns: string[] = ['id', 'product', 'amount', 'thresholdAmount', 'stockWarning', 'shelf', 'floor', 'lastIncoming', 'lastOutgoing'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
@@ -90,6 +90,12 @@ export class StockComponent implements AfterViewInit {
       case "bestand":
         matches = data.amount == parseInt(filterValue);
         break;
+      case "warngrenze":
+        matches = data.thresholdAmount == parseInt(filterValue);
+        break;
+      case "bestandswarnung":
+        matches = this.getStockWarningPresentation(data).includes(filterValue);
+        break;
       case "regal":
         matches = data.shelf == parseInt(filterValue);
         break;
@@ -107,6 +113,8 @@ export class StockComponent implements AfterViewInit {
           data.id == parseInt(filterValue) ||
           data.product.name.toLocaleLowerCase().includes(filterValue) ||
           data.amount == parseInt(filterValue) ||
+          data.thresholdAmount == parseInt(filterValue) ||
+          this.getStockWarningPresentation(data).includes(filterValue) ||
           data.shelf == parseInt(filterValue) ||
           data.floor == parseInt(filterValue) ||
           data.amount == parseInt(filterValue) ||
@@ -123,10 +131,14 @@ export class StockComponent implements AfterViewInit {
   }
 
   createStockEntry() {
-
+    alert("TBD")
   }
 
   formatDate(lastIncoming: any) {
-   return formatDate(lastIncoming, this.dateFormat, this.locale);
+    return formatDate(lastIncoming, this.dateFormat, this.locale);
+  }
+
+  getStockWarningPresentation(stockEntry: Stock): string {
+    return stockEntry.stockWarning ? "ja" : "nein";
   }
 }

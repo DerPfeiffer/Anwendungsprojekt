@@ -31,10 +31,27 @@ public class StockService {
     public Stock put(int amount, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
         return repository.save(new Stock(amount, lastIncoming, lastOutgoing, shelf, floor, product));
     }
+    public Stock put(int amount, int thresholdAmount, boolean stockWarning, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
+        return repository.save(new Stock(amount, thresholdAmount, stockWarning, lastIncoming, lastOutgoing, shelf, floor, product));
+    }
 
     public Stock post(Long id, int amount, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
         Stock stock = get(id);
         stock.setAmount(amount);
+        stock.setLastIncoming(lastIncoming);
+        stock.setLastOutgoing(lastOutgoing);
+        stock.setShelf(shelf);
+        stock.setFloor(floor);
+        stock.setProduct(product);
+
+        return repository.save(stock);
+    }
+
+    public Stock post(Long id, int amount, int thresholdAmount, boolean stockWarning, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
+        Stock stock = get(id);
+        stock.setAmount(amount);
+        stock.setThresholdAmount(thresholdAmount);
+        stock.setStockWarning(stockWarning);
         stock.setLastIncoming(lastIncoming);
         stock.setLastOutgoing(lastOutgoing);
         stock.setShelf(shelf);

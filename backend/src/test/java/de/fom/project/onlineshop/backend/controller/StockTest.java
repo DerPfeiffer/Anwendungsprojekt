@@ -46,7 +46,7 @@ public class StockTest {
 
     @Test
     public void put() throws ParseException {
-        Stock neues_item = controller.put("9", "2022-05-28T21:38:44+0000", "2022-05-30T21:38:44+0000", "8", "9", String.valueOf(productController.get("9").getId()));
+        Stock neues_item = controller.put("9", "","2022-05-28T21:38:44+0000", "2022-05-30T21:38:44+0000", "8", "9", String.valueOf(productController.get("9").getId()));
         Stock stock = controller.get(String.valueOf(neues_item.getId()));
 
         assertThat(stock).isNotNull();
