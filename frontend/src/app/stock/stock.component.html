@@ -76,6 +76,15 @@
         <td mat-cell *matCellDef="let stockEntry">{{formatDate(stockEntry.lastOutgoing)}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="actions">
+        <th id="actionsHeader" mat-header-cell *matHeaderCellDef style="width: 50px"></th>
+        <td mat-cell *matCellDef="let stockEntry">
+          <mat-icon (click)="updateStock(stockEntry)">create</mat-icon>
+          <mat-icon (click)="deleteStock(stockEntry)">delete</mat-icon>
+        </td>
+      </ng-container>
+
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"
           [class.warning]='row.thresholdAmount > row.amount'></tr>
