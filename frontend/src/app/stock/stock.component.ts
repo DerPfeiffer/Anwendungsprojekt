@@ -96,6 +96,9 @@ export class StockComponent implements AfterViewInit {
       case "produkt":
         matches = data.product.name.toLocaleLowerCase().includes(filterValue);
         break;
+      case "produzent":
+        matches = data.product.producer.name.toLocaleLowerCase().includes(filterValue);
+        break;
       case "bestand":
         matches = data.amount == parseInt(filterValue);
         break;
@@ -121,6 +124,7 @@ export class StockComponent implements AfterViewInit {
         matches =
           data.id == parseInt(filterValue) ||
           data.product.name.toLocaleLowerCase().includes(filterValue) ||
+          data.product.producer.name.toLocaleLowerCase().includes(filterValue) ||
           data.amount == parseInt(filterValue) ||
           data.thresholdAmount == parseInt(filterValue) ||
           this.getStockWarningPresentation(data).includes(filterValue) ||
@@ -151,23 +155,19 @@ export class StockComponent implements AfterViewInit {
     return stockEntry.stockWarning ? "ja" : "nein";
   }
 
-  filterWarnings() {
-    let stockWithWarnings: Stock[] = this.stock.filter(entry => entry.stockWarning);
-    this.dataSource.data = stockWithWarnings;
-    this.toggleFilterButtons();
-  }
-
-  filterNothing() {
-    this.dataSource.data = this.stock;
-    this.toggleFilterButtons();
-  }
-
   toggleFilterButtons() {
     let buttonWarningsElement = document.getElementById("button_warnings") as Element;
     let buttonAllElement = document.getElementById("button_all") as Element;
 
-    buttonWarningsElement.classList.contains(this.primaryClass) ? buttonWarningsElement.classList.remove(this.primaryClass) : buttonWarningsElement.classList.add(this.primaryClass);
-    buttonAllElement.classList.contains(this.primaryClass) ? buttonAllElement.classList.remove(this.primaryClass) : buttonAllElement.classList.add(this.primaryClass);
+    if (buttonWarningsElement.classList.contains(this.primaryClass)) {
+      buttonWarningsElement.classList.remove(this.primaryClass);
+      buttonAllElement.classList.add(this.primaryClass);
+      this.dataSource.data = this.stock;
+    } else {
+      buttonWarningsElement.classList.add(this.primaryClass);
+      buttonAllElement.classList.remove(this.primaryClass);
+      this.dataSource.data = this.stock.filter(entry => entry.stockWarning);
+    }
   }
 
   createStockEntry() {
