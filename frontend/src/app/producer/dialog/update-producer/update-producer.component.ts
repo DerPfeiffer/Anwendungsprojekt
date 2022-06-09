@@ -1,7 +1,6 @@
-import {Component, Inject, OnInit, Optional} from '@angular/core';
+import {Component, Inject, Optional} from '@angular/core';
 import {Producer} from "../../../interface/producer";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ProducerService} from "../../../service/producer.service";
 
 @Component({
   selector: 'app-update-producer',

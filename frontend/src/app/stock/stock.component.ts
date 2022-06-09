@@ -11,6 +11,7 @@ import {formatDate} from "@angular/common";
 import {ProductService} from "../service/product.service";
 import {CreateStockComponent} from "./dialog/create-stock/create-stock.component";
 import {DeleteStockComponent} from "./dialog/delete-stock/delete-stock.component";
+import {UpdateStockComponent} from "./dialog/update-stock/update-stock.component";
 
 @Component({
   selector: 'app-stock',
@@ -189,7 +190,17 @@ export class StockComponent implements AfterViewInit {
   }
 
   updateStock(stock: Stock) {
-
+    const dialog = this._dialog.open(UpdateStockComponent, {data: stock});
+    dialog.afterClosed().subscribe((res) => {
+      if (res.event == "yes") {
+        console.log(res.stock);
+        this._service.post(res.stock).subscribe(data => {
+          if (data != null) {
+            this.getStock();
+          }
+        })
+      }
+    })
   }
 
   deleteStock(stock: Stock) {

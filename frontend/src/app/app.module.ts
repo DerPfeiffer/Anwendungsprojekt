@@ -33,6 +33,7 @@ import {CreateStockComponent} from './stock/dialog/create-stock/create-stock.com
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import { DeleteStockComponent } from './stock/dialog/delete-stock/delete-stock.component';
+import { UpdateStockComponent } from './stock/dialog/update-stock/update-stock.component';
 
 export const HTTP_BASE_URL = "http://localhost:8080/"
 
@@ -51,7 +52,8 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     UpdateProductComponent,
     StockComponent,
     CreateStockComponent,
-    DeleteStockComponent
+    DeleteStockComponent,
+    UpdateStockComponent
   ],
   imports: [
     BrowserModule,

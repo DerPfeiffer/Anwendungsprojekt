@@ -1,0 +1,29 @@
+<h2>Aktualisierung des Bestandes von {{stock.product.name}} (Produzent: {{stock.product.producer.name}})</h2>
+<form>
+  <mat-form-field>
+    <mat-label>Bestand</mat-label>
+    <input matInput [(ngModel)]="stock.amount" type="number" placeholder="0" name="Bestand">
+    <span matSuffix> Stück</span>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Warngrenze</mat-label>
+    <input matInput [(ngModel)]="stock.thresholdAmount" type="number" placeholder="0" name="Warngrenze">
+    <span matSuffix> Stück</span>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Regal</mat-label>
+    <input matInput [(ngModel)]="stock.shelf" type="number" placeholder="0" name="Regal">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Stock</mat-label>
+    <input matInput [(ngModel)]="stock.floor" type="number" placeholder="0" name="Stock">
+  </mat-form-field>
+
+  <div fxLayout>
+    <button mat-button (click)="submit()" fxFlex="50%">Speichern</button>
+    <button mat-button (click)="cancel()" fxFlex="50%">Abbrechen</button>
+  </div>
+</form>
