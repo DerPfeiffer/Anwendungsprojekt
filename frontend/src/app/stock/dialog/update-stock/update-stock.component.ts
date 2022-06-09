@@ -1,7 +1,6 @@
 import {Component, Inject, Optional} from '@angular/core';
 import {Stock} from "../../../interface/stock";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Product} from "../../../interface/product";
 
 @Component({
   selector: 'app-update-stock',

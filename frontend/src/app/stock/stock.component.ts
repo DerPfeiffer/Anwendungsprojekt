@@ -192,13 +192,15 @@ export class StockComponent implements AfterViewInit {
   updateStock(stock: Stock) {
     const dialog = this._dialog.open(UpdateStockComponent, {data: stock});
     dialog.afterClosed().subscribe((res) => {
-      if (res.event == "yes") {
+      if (res && res.event == "yes") {
         console.log(res.stock);
         this._service.post(res.stock).subscribe(data => {
           if (data != null) {
             this.getStock();
           }
         })
+      } else {
+        this.getStock();
       }
     })
   }
@@ -206,7 +208,7 @@ export class StockComponent implements AfterViewInit {
   deleteStock(stock: Stock) {
     const dialog = this._dialog.open(DeleteStockComponent, {data: stock});
     dialog.afterClosed().subscribe((res) => {
-      if (res.event == "yes") {
+      if (res && res.event == "yes") {
         this._service.delete(stock).subscribe(() => {
           this.getStock();
         })

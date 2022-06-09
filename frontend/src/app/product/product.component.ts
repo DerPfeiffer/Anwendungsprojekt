@@ -93,10 +93,12 @@ export class ProductComponent implements AfterViewInit {
     this._producerService.getAll().subscribe(data => {
       const dialog = this._dialog.open(UpdateProductComponent, {data: {producer: data, product: product}});
       dialog.afterClosed().subscribe((res) => {
-        if (res.event == "yes") {
+        if (res && res.event == "yes") {
           this._service.post(res.product).subscribe(() => {
             this.getAllProducts();
           })
+        } else {
+          this.getAllProducts();
         }
       })
     });

@@ -68,10 +68,12 @@ export class ProducerComponent implements AfterViewInit {
   updateProducer(producer: Producer) {
     const dialog = this._dialog.open(UpdateProducerComponent, {data: producer});
     dialog.afterClosed().subscribe((res) => {
-      if (res.event == "yes") {
+      if (res && res.event == "yes") {
         this._service.post(res.producer).subscribe(() => {
           this._sharedService.sendReloadProductsEvent();
         })
+      } else {
+        this.getAllProducer();
       }
     })
   }
