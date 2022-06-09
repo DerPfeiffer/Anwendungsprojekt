@@ -10,7 +10,6 @@ import {MatPaginator} from "@angular/material/paginator";
 import {formatDate} from "@angular/common";
 import {ProductService} from "../service/product.service";
 import {CreateStockComponent} from "./dialog/create-stock/create-stock.component";
-import {DeleteProducerComponent} from "../producer/dialog/delete-producer/delete-producer.component";
 import {DeleteStockComponent} from "./dialog/delete-stock/delete-stock.component";
 
 @Component({
@@ -139,24 +138,6 @@ export class StockComponent implements AfterViewInit {
     this.dataSource.filter = filter.trim().toLowerCase();
   }
 
-  createStockEntry() {
-    this._productService.getAll().subscribe(data => {
-      const dialog = this._dialog.open(CreateStockComponent, {data: data});
-      dialog.afterClosed().subscribe((res) => {
-        if (res.event == "yes") {
-          console.log(res.stock);
-          this._service.put(res.stock).subscribe(data => {
-            if (data != null) {
-              this.getStock();
-            } else {
-              alert(this.productAlreadyDeclaredMessage);
-            }
-          })
-        }
-      })
-    });
-  }
-
   formatDate(date: Date) {
     if (date.getTime() === 0) {
       return "n.a.";
@@ -186,6 +167,25 @@ export class StockComponent implements AfterViewInit {
 
     buttonWarningsElement.classList.contains(this.primaryClass) ? buttonWarningsElement.classList.remove(this.primaryClass) : buttonWarningsElement.classList.add(this.primaryClass);
     buttonAllElement.classList.contains(this.primaryClass) ? buttonAllElement.classList.remove(this.primaryClass) : buttonAllElement.classList.add(this.primaryClass);
+  }
+
+  createStockEntry() {
+    this._productService.getAll().subscribe(data => {
+      const productsAbleToAdd = data.filter(product => (this.stock.find(stockEntry => stockEntry.product.id == product.id)) ? false : true);
+      const dialog = this._dialog.open(CreateStockComponent, {data: productsAbleToAdd});
+      dialog.afterClosed().subscribe((res) => {
+        if (res.event == "yes") {
+          console.log(res.stock);
+          this._service.put(res.stock).subscribe(data => {
+            if (data != null) {
+              this.getStock();
+            } else {
+              alert(this.productAlreadyDeclaredMessage);
+            }
+          })
+        }
+      })
+    });
   }
 
   updateStock(stock: Stock) {
