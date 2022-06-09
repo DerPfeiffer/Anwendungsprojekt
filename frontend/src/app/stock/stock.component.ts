@@ -24,6 +24,7 @@ export class StockComponent implements AfterViewInit {
   dateFormat = "dd.MM.yyyy hh:mm:ss";
   locale = 'de-DE';
   productAlreadyDeclaredMessage = "Das Produkt ist bereits zu einem anderen Eintrag hinterlegt. Der Eintrag wurde nicht gespeichert.";
+  primaryClass = "mat-primary";
 
   key = "id";
   stock: Stock [] = [];
@@ -49,12 +50,15 @@ export class StockComponent implements AfterViewInit {
         entry.lastOutgoing = new Date(entry.lastOutgoing);
       })
       this.stock = data;
-      this.updateDataSource();
+      this.updateDataSource(data);
+
+      let buttonAllElement = document.getElementById("button_all") as Element;
+      buttonAllElement.classList.add(this.primaryClass);
     });
   }
 
-  updateDataSource() {
-    this.dataSource.data = this.stock;
+  updateDataSource(dataToDisplay: Stock[]) {
+    this.dataSource.data = dataToDisplay;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
@@ -162,5 +166,24 @@ export class StockComponent implements AfterViewInit {
 
   getStockWarningPresentation(stockEntry: Stock) {
     return stockEntry.stockWarning ? "ja" : "nein";
+  }
+
+  filterWarnings() {
+    let stockWithWarnings: Stock[] = this.stock.filter(entry => entry.stockWarning);
+    this.dataSource.data = stockWithWarnings;
+    this.toggleFilterButtons();
+  }
+
+  filterNothing() {
+    this.dataSource.data = this.stock;
+    this.toggleFilterButtons();
+  }
+
+  toggleFilterButtons() {
+    let buttonWarningsElement = document.getElementById("button_warnings") as Element;
+    let buttonAllElement = document.getElementById("button_all") as Element;
+
+    buttonWarningsElement.classList.contains(this.primaryClass) ? buttonWarningsElement.classList.remove(this.primaryClass) : buttonWarningsElement.classList.add(this.primaryClass);
+    buttonAllElement.classList.contains(this.primaryClass) ? buttonAllElement.classList.remove(this.primaryClass) : buttonAllElement.classList.add(this.primaryClass);
   }
 }

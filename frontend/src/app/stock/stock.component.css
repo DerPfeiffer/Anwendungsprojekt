@@ -1,3 +1,35 @@
 .warning {
   background-color: #ffd296;
 }
+
+#idHeader {
+  width: 5em;
+}
+
+#amountHeader {
+  width: 8em;
+}
+
+#thresholdAmountHeader {
+  width: 8em;
+}
+
+#warningHeader {
+  width: 10em;
+}
+
+#shelfHeader {
+  width: 5em;
+}
+
+#floorHeader {
+  width: 5em;
+}
+
+#lastIncomingHeader {
+  width: 20em;
+}
+
+#lastOutgoingHeader {
+  width: 20em;
+}

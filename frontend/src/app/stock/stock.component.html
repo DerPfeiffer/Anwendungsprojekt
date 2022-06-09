@@ -3,68 +3,82 @@
     <h1>Bestand</h1>
   </div>
   <div>
-    <button mat-raised-button (click)="createStockEntry()" class="demo-button">
+    <button mat-raised-button (click)="createStockEntry()">
       Eintrag hinzufügen
     </button>
+    <div style="float:right">
+      <button mat-raised-button id="button_warnings" (click)="filterWarnings()" style="margin-right: 10px">
+        Nur Bestandswarnungen
+      </button>
+      <button mat-raised-button id="button_all" (click)="filterNothing()">
+        Alle Einträge
+      </button>
+    </div>
   </div>
   <div>
     <mat-form-field appearance="standard" class="filter">
       <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" #input placeholder="Direkteingabe oder Eingabe nach Attribut (Spaltenname:<Suchbegriff>)">
+      <input matInput (keyup)="applyFilter($event)" #input
+             placeholder="Direkteingabe oder Eingabe nach Attribut (Spaltenname:<Suchbegriff>)">
     </mat-form-field>
   </div>
   <div>
     <table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
 
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header
+        <th id="idHeader" mat-header-cell *matHeaderCellDef mat-sort-header
             sortActionDescription="Sortiere nach Identifikationsnummer">ID
         </th>
         <td mat-cell *matCellDef="let stockEntry">{{stockEntry.id}}</td>
       </ng-container>
 
       <ng-container matColumnDef="product">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Produkt">Produkt</th>
+        <th id="productHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Produkt">Produkt</th>
         <td mat-cell *matCellDef="let stockEntry">{{stockEntry.product.name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Bestand">Bestand</th>
+        <th id="amountHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Bestand">Bestand</th>
         <td mat-cell *matCellDef="let stockEntry">{{stockEntry.amount}}</td>
       </ng-container>
 
       <ng-container matColumnDef="thresholdAmount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Bestandsgrenze">Warngrenze</th>
+        <th id="thresholdAmountHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Bestandsgrenze">
+          Warngrenze
+        </th>
         <td mat-cell *matCellDef="let stockEntry">{{stockEntry.thresholdAmount}}</td>
       </ng-container>
 
       <ng-container matColumnDef="stockWarning">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Bestandswarnung vorhanden">Bestandswarnung</th>
+        <th id="warningHeader" mat-header-cell *matHeaderCellDef mat-sort-header
+            sortActionDescription="Sortiere nach Bestandswarnung vorhanden">Bestandswarnung
+        </th>
         <td mat-cell *matCellDef="let stockEntry">{{getStockWarningPresentation(stockEntry)}}</td>
       </ng-container>
 
       <ng-container matColumnDef="floor">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock</th>
+        <th id="floorHeader" mat-header-cell *matHeaderCellDef mat-sort-header>Stock</th>
         <td mat-cell *matCellDef="let stockEntry"> {{stockEntry.floor}}</td>
       </ng-container>
 
       <ng-container matColumnDef="shelf">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Regal</th>
+        <th id="shelfHeader" mat-header-cell *matHeaderCellDef mat-sort-header>Regal</th>
         <td mat-cell *matCellDef="let stockEntry">{{stockEntry.shelf}}</td>
       </ng-container>
 
       <ng-container matColumnDef="lastIncoming">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Letzter Wareneingang</th>
+        <th id="lastIncomingHeader" mat-header-cell *matHeaderCellDef mat-sort-header>Letzter Wareneingang</th>
         <td mat-cell *matCellDef="let stockEntry">{{formatDate(stockEntry.lastIncoming)}}</td>
       </ng-container>
 
       <ng-container matColumnDef="lastOutgoing">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Letzter Warenausgang</th>
+        <th id="lastOutgoingHeader" mat-header-cell *matHeaderCellDef mat-sort-header>Letzter Warenausgang</th>
         <td mat-cell *matCellDef="let stockEntry">{{formatDate(stockEntry.lastOutgoing)}}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns" [class.warning]='row.thresholdAmount > row.amount'></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"
+          [class.warning]='row.thresholdAmount > row.amount'></tr>
 
       <!-- Keine Ergebnisse nach Filterung -->
       <tr class="mat-row" *matNoDataRow>
