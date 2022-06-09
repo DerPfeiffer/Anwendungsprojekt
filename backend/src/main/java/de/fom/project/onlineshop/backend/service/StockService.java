@@ -7,7 +7,10 @@ import de.fom.project.onlineshop.backend.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,16 +35,12 @@ public class StockService {
         return repository.findByProductIdAndIdNot(productId, 0L).orElse(null);
     }
 
-    public Stock put(int amount, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
-        return repository.save(new Stock(amount, lastIncoming, lastOutgoing, shelf, floor, product));
-    }
-    public Stock put(int amount, int thresholdAmount, boolean stockWarning, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
-        return repository.save(new Stock(amount, thresholdAmount, stockWarning, lastIncoming, lastOutgoing, shelf, floor, product));
-    }
+    public Stock put(int amount, int thresholdAmount, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
+        Stock stock = new Stock();
 
-    public Stock post(Long id, int amount, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
-        Stock stock = get(id);
         stock.setAmount(amount);
+        stock.setThresholdAmount(thresholdAmount);
+        stock.setStockWarning(stock.getAmount() >= stock.getThresholdAmount());
         stock.setLastIncoming(lastIncoming);
         stock.setLastOutgoing(lastOutgoing);
         stock.setShelf(shelf);
@@ -51,13 +50,20 @@ public class StockService {
         return repository.save(stock);
     }
 
-    public Stock post(Long id, int amount, int thresholdAmount, boolean stockWarning, Timestamp lastIncoming, Timestamp lastOutgoing, int shelf, int floor, Product product) {
+    public Stock post(Long id, int amount, int thresholdAmount, boolean stockWarning, int shelf, int floor, Product product) {
         Stock stock = get(id);
+
+        // Bestand ist höher als vorher, also hat Wareneingang stattgefunden
+        // Bestand ist geringer als vorher, also hat Warenausgang stattgefunden
+        if(stock.getAmount() > amount) {
+            stock.setLastOutgoing(Timestamp.from(Instant.now()));
+        } else {
+            stock.setLastIncoming(Timestamp.from(Instant.now()));
+        }
+
         stock.setAmount(amount);
         stock.setThresholdAmount(thresholdAmount);
-        stock.setStockWarning(stockWarning);
-        stock.setLastIncoming(lastIncoming);
-        stock.setLastOutgoing(lastOutgoing);
+        stock.setStockWarning(stock.getAmount() <= stock.getThresholdAmount());
         stock.setShelf(shelf);
         stock.setFloor(floor);
         stock.setProduct(product);

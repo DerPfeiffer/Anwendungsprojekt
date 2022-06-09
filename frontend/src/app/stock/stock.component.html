@@ -86,8 +86,7 @@
 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"
-          [class.warning]='row.thresholdAmount > row.amount'></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" [class.warning]='row.stockWarning'></tr>
 
       <!-- Keine Ergebnisse nach Filterung -->
       <tr class="mat-row" *matNoDataRow>

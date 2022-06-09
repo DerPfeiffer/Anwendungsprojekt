@@ -22,7 +22,7 @@ export class StockComponent implements AfterViewInit {
 
   clickEventSubscription: Subscription;
 
-  dateFormat = "dd.MM.yyyy hh:mm:ss";
+  dateFormat = "dd.MM.yyyy HH:mm:ss";
   locale = 'de-DE';
   productAlreadyDeclaredMessage = "Das Produkt ist bereits zu einem anderen Eintrag hinterlegt. Der Eintrag wurde nicht gespeichert.";
   primaryClass = "mat-primary";
