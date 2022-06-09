@@ -72,6 +72,9 @@ export class ProductComponent implements AfterViewInit {
     this.dataSource.filter = filter.trim().toLowerCase();
   }
 
+  parseFloat(price: any) {
+    return parseFloat(price).toFixed(2);
+  }
 
   createProduct() {
     this._producerService.getAll().subscribe(data => {
@@ -83,17 +86,6 @@ export class ProductComponent implements AfterViewInit {
           })
         }
       })
-    });
-  }
-
-  deleteProduct(product: Product) {
-    const dialog = this._dialog.open(DeleteProductComponent, {data: product});
-    dialog.afterClosed().subscribe((res) => {
-      if (res.event == "yes") {
-        this._service.delete(product).subscribe(() => {
-          this.getAllProducts();
-        })
-      }
     });
   }
 
@@ -110,8 +102,15 @@ export class ProductComponent implements AfterViewInit {
     });
   }
 
-  parseFloat(price: any) {
-    return parseFloat(price).toFixed(2);
+  deleteProduct(product: Product) {
+    const dialog = this._dialog.open(DeleteProductComponent, {data: product});
+    dialog.afterClosed().subscribe((res) => {
+      if (res.event == "yes") {
+        this._service.delete(product).subscribe(() => {
+          this.getAllProducts();
+        })
+      }
+    });
   }
 
 }

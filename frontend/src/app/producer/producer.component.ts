@@ -65,22 +65,22 @@ export class ProducerComponent implements AfterViewInit {
     })
   }
 
-  deleteProducer(producer: Producer) {
-    const dialog = this._dialog.open(DeleteProducerComponent, {data: producer});
+  updateProducer(producer: Producer) {
+    const dialog = this._dialog.open(UpdateProducerComponent, {data: producer});
     dialog.afterClosed().subscribe((res) => {
       if (res.event == "yes") {
-        this._service.delete(producer).subscribe(() => {
+        this._service.post(res.producer).subscribe(() => {
           this._sharedService.sendReloadProductsEvent();
         })
       }
     })
   }
 
-  updateProducer(producer: Producer) {
-    const dialog = this._dialog.open(UpdateProducerComponent, {data: producer});
+  deleteProducer(producer: Producer) {
+    const dialog = this._dialog.open(DeleteProducerComponent, {data: producer});
     dialog.afterClosed().subscribe((res) => {
       if (res.event == "yes") {
-        this._service.post(res.producer).subscribe(() => {
+        this._service.delete(producer).subscribe(() => {
           this._sharedService.sendReloadProductsEvent();
         })
       }
