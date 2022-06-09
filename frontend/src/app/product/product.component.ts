@@ -95,6 +95,7 @@ export class ProductComponent implements AfterViewInit {
       dialog.afterClosed().subscribe((res) => {
         if (res && res.event == "yes") {
           this._service.post(res.product).subscribe(() => {
+            this._sharedService.sendReloadProductsEvent();
             this.getAllProducts();
           })
         } else {
