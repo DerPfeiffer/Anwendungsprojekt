@@ -29,4 +29,14 @@ th.mat-sort-header-sorted {
   width: 100%;
 }
 
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+th, td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 

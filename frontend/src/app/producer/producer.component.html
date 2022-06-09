@@ -19,12 +19,12 @@
 
       <ng-container matColumnDef="id">
         <th id="idHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Kreditorennummer">Kreditorennummer</th>
-        <td mat-cell *matCellDef="let producer">{{producer.id}}</td>
+        <td mat-cell *matCellDef="let producer" id="id" [matTooltip]="showTooltipIfOverflows(producer.id, 'id')">{{producer.id}}</td>
       </ng-container>
 
       <ng-container matColumnDef="name">
         <th id="nameHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Name">Name</th>
-        <td mat-cell *matCellDef="let producer">{{producer.name}}</td>
+        <td mat-cell *matCellDef="let producer" id="name" [matTooltip]="showTooltipIfOverflows(producer.id, 'name')">{{producer.name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
@@ -36,7 +36,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" [id]="row.id"></tr>
 
       <!-- Keine Ergebnisse nach Filterung -->
       <tr class="mat-row" *matNoDataRow>

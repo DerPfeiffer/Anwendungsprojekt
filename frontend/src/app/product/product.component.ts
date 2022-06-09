@@ -11,6 +11,7 @@ import {DeleteProductComponent} from "./dialog/delete-product/delete-product.com
 import {CreateProductComponent} from "./dialog/create-product/create-product.component";
 import {UpdateProductComponent} from "./dialog/update-product/update-product.component";
 import {MatPaginator} from "@angular/material/paginator";
+import TooltipUtils from "../utils/TooltipUtils";
 
 @Component({
   selector: 'app-product',
@@ -114,6 +115,10 @@ export class ProductComponent implements AfterViewInit {
         })
       }
     });
+  }
+
+  showTooltipIfOverflows(rowId: number, columnName: string) {
+    return TooltipUtils.showTooltipIfOverflows(rowId, columnName);
   }
 
 }

@@ -12,6 +12,7 @@ import {ProductService} from "../service/product.service";
 import {CreateStockComponent} from "./dialog/create-stock/create-stock.component";
 import {DeleteStockComponent} from "./dialog/delete-stock/delete-stock.component";
 import {UpdateStockComponent} from "./dialog/update-stock/update-stock.component";
+import TooltipUtils from "../utils/TooltipUtils";
 
 @Component({
   selector: 'app-stock',
@@ -216,4 +217,7 @@ export class StockComponent implements AfterViewInit {
     })
   }
 
+  showTooltipIfOverflows(rowId: number, columnName: string) {
+    return TooltipUtils.showTooltipIfOverflows(rowId, columnName);
+  }
 }

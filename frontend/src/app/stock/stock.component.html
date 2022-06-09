@@ -29,56 +29,56 @@
         <th id="idHeader" mat-header-cell *matHeaderCellDef mat-sort-header
             sortActionDescription="Sortiere nach Identifikationsnummer">ID
         </th>
-        <td mat-cell *matCellDef="let stockEntry">{{stockEntry.id}}</td>
+        <td mat-cell *matCellDef="let stockEntry" id="id" [matTooltip]="showTooltipIfOverflows(stockEntry.id, 'id')">{{stockEntry.id}}</td>
       </ng-container>
 
       <ng-container matColumnDef="product">
         <th id="productHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Produkt">Produkt</th>
-        <td mat-cell *matCellDef="let stockEntry">{{stockEntry.product.name}}</td>
+        <td mat-cell *matCellDef="let stockEntry" id="product" [matTooltip]="showTooltipIfOverflows(stockEntry.id, 'product')">{{stockEntry.product.name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="producer">
         <th id="producerHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Proudzent">Produzent</th>
-        <td mat-cell *matCellDef="let stockEntry">{{stockEntry.product.producer.name}}</td>
+        <td mat-cell *matCellDef="let stockEntry" id="producer" [matTooltip]="showTooltipIfOverflows(stockEntry.id, 'producer')">{{stockEntry.product.producer.name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="amount">
         <th id="amountHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Bestand">Bestand</th>
-        <td mat-cell *matCellDef="let stockEntry">{{stockEntry.amount}}</td>
+        <td mat-cell *matCellDef="let stockEntry" id="amount" [matTooltip]="showTooltipIfOverflows(stockEntry.id, 'amount')">{{stockEntry.amount}}</td>
       </ng-container>
 
       <ng-container matColumnDef="thresholdAmount">
         <th id="thresholdAmountHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Bestandsgrenze">
           Warngrenze
         </th>
-        <td mat-cell *matCellDef="let stockEntry">{{stockEntry.thresholdAmount}}</td>
+        <td mat-cell *matCellDef="let stockEntry" id="thresholdAmount" [matTooltip]="showTooltipIfOverflows(stockEntry.id, 'thresholdAmount')">{{stockEntry.thresholdAmount}}</td>
       </ng-container>
 
       <ng-container matColumnDef="stockWarning">
         <th id="warningHeader" mat-header-cell *matHeaderCellDef mat-sort-header
             sortActionDescription="Sortiere nach Bestandswarnung vorhanden">Bestandswarnung
         </th>
-        <td mat-cell *matCellDef="let stockEntry">{{getStockWarningPresentation(stockEntry)}}</td>
+        <td mat-cell *matCellDef="let stockEntry" id="stockWarning" [matTooltip]="showTooltipIfOverflows(stockEntry.id, 'stockWarning')">{{getStockWarningPresentation(stockEntry)}}</td>
       </ng-container>
 
       <ng-container matColumnDef="floor">
         <th id="floorHeader" mat-header-cell *matHeaderCellDef mat-sort-header>Stock</th>
-        <td mat-cell *matCellDef="let stockEntry"> {{stockEntry.floor}}</td>
+        <td mat-cell *matCellDef="let stockEntry" id="floor" [matTooltip]="showTooltipIfOverflows(stockEntry.id, 'floor')"> {{stockEntry.floor}}</td>
       </ng-container>
 
       <ng-container matColumnDef="shelf">
         <th id="shelfHeader" mat-header-cell *matHeaderCellDef mat-sort-header>Regal</th>
-        <td mat-cell *matCellDef="let stockEntry">{{stockEntry.shelf}}</td>
+        <td mat-cell *matCellDef="let stockEntry" id="shelf" [matTooltip]="showTooltipIfOverflows(stockEntry.id, 'shelf')">{{stockEntry.shelf}}</td>
       </ng-container>
 
       <ng-container matColumnDef="lastIncoming">
         <th id="lastIncomingHeader" mat-header-cell *matHeaderCellDef mat-sort-header>Letzter Wareneingang</th>
-        <td mat-cell *matCellDef="let stockEntry">{{formatDate(stockEntry.lastIncoming)}}</td>
+        <td mat-cell *matCellDef="let stockEntry" id="lastIncoming" [matTooltip]="showTooltipIfOverflows(stockEntry.id, 'lastIncoming')">{{formatDate(stockEntry.lastIncoming)}}</td>
       </ng-container>
 
       <ng-container matColumnDef="lastOutgoing">
         <th id="lastOutgoingHeader" mat-header-cell *matHeaderCellDef mat-sort-header>Letzter Warenausgang</th>
-        <td mat-cell *matCellDef="let stockEntry">{{formatDate(stockEntry.lastOutgoing)}}</td>
+        <td mat-cell *matCellDef="let stockEntry" id="lastOutgoing" [matTooltip]="showTooltipIfOverflows(stockEntry.id, 'lastOutgoing')">{{formatDate(stockEntry.lastOutgoing)}}</td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
@@ -91,7 +91,7 @@
 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns" [class.warning]='row.stockWarning'></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" [id]="row.id" [class.warning]='row.stockWarning'></tr>
 
       <!-- Keine Ergebnisse nach Filterung -->
       <tr class="mat-row" *matNoDataRow>

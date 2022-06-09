@@ -10,6 +10,7 @@ import {DeleteProducerComponent} from "./dialog/delete-producer/delete-producer.
 import {Subscription} from "rxjs";
 import {UpdateProducerComponent} from "./dialog/update-producer/update-producer.component";
 import {MatPaginator} from "@angular/material/paginator";
+import TooltipUtils from "../utils/TooltipUtils";
 
 @Component({
   selector: 'app-producer',
@@ -87,6 +88,10 @@ export class ProducerComponent implements AfterViewInit {
         })
       }
     })
+  }
+
+  showTooltipIfOverflows(rowId: number, columnName: string) {
+    return TooltipUtils.showTooltipIfOverflows(rowId, columnName);
   }
 
 }
