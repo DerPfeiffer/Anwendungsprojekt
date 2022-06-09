@@ -13,10 +13,11 @@ export class DeleteStockComponent {
   }
 
   submit() {
-    this.dialogRef.close({event: 'yes'});
+    this.dialogRef.close({event: "yes"});
   }
 
   cancel() {
-    this.dialogRef.close({event: 'no'});
+    this.dialogRef.close({event: "no"});
   }
+
 }

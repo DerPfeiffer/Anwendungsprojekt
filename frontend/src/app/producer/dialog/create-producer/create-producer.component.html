@@ -1,8 +1,11 @@
 <h2>Anlage eines Produzenten</h2>
-<form>
+<form [formGroup]="form">
   <mat-form-field>
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="producer.name" name="name">
+    <input formControlName="name" matInput name="name">
+    <div *ngIf="name?.touched && name?.invalid" style="margin-top: 10px">
+      Bitte geben Sie einen Namen ein.
+    </div>
   </mat-form-field>
 </form>
 

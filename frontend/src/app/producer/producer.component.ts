@@ -57,7 +57,7 @@ export class ProducerComponent implements AfterViewInit {
   createProducer() {
     const dialog = this._dialog.open(CreateProducerComponent);
     dialog.afterClosed().subscribe((res) => {
-      if (res.event == "yes") {
+      if (res && res.event == "yes") {
         this._service.put(res.producer).subscribe(() => {
           this._sharedService.sendReloadProductsEvent();
         })
@@ -81,11 +81,12 @@ export class ProducerComponent implements AfterViewInit {
   deleteProducer(producer: Producer) {
     const dialog = this._dialog.open(DeleteProducerComponent, {data: producer});
     dialog.afterClosed().subscribe((res) => {
-      if (res.event == "yes") {
+      if (res && res.event == "yes") {
         this._service.delete(producer).subscribe(() => {
           this._sharedService.sendReloadProductsEvent();
         })
       }
     })
   }
+
 }

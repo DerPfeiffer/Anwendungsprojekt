@@ -37,6 +37,11 @@
         <td mat-cell *matCellDef="let stockEntry">{{stockEntry.product.name}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="producer">
+        <th id="producerHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Proudzent">Produzent</th>
+        <td mat-cell *matCellDef="let stockEntry">{{stockEntry.product.producer.name}}</td>
+      </ng-container>
+
       <ng-container matColumnDef="amount">
         <th id="amountHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Bestand">Bestand</th>
         <td mat-cell *matCellDef="let stockEntry">{{stockEntry.amount}}</td>

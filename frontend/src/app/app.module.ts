@@ -18,7 +18,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {CreateProducerComponent} from './producer/dialog/create-producer/create-producer.component';
 import {DeleteProducerComponent} from './producer/dialog/delete-producer/delete-producer.component';
 import {DeleteProductComponent} from './product/dialog/delete-product/delete-product.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {UpdateProducerComponent} from './producer/dialog/update-producer/update-producer.component';
 import {CreateProductComponent} from './product/dialog/create-product/create-product.component';
@@ -72,7 +72,8 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     MatSelectModule,
     MatPaginatorModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl},

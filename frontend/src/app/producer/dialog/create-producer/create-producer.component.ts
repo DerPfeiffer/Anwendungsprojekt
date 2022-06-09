@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, Inject, OnInit, Optional} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {Component} from '@angular/core';
+import {MatDialogRef} from "@angular/material/dialog";
 import {Producer} from "../../../interface/producer";
-import {ProducerService} from "../../../service/producer.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-create-producer',
@@ -10,16 +10,33 @@ import {ProducerService} from "../../../service/producer.service";
 })
 export class CreateProducerComponent {
 
-  producer = {} as Producer;
+  form: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<CreateProducerComponent>) {
+    this.form = new FormGroup({
+      name: new FormControl("", [Validators.required])
+    });
+  }
+
+  get name() {
+    return this.form.get("name")
   }
 
   submit() {
-    this.dialogRef.close(({event: 'yes', producer: this.producer}));
+    if (this.form.valid) {
+      this.dialogRef.close(({event: "yes", producer: this.getFormValuesAsModel()}));
+    }
+  }
+
+  getFormValuesAsModel(): Producer {
+    let producer = {} as Producer;
+    producer.name = this.form.get("name")?.value;
+
+    return producer;
   }
 
   cancel() {
-    this.dialogRef.close(({event: 'no'}));
+    this.dialogRef.close(({event: "no"}));
   }
+
 }

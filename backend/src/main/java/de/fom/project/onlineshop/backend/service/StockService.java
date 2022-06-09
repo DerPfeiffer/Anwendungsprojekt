@@ -40,7 +40,7 @@ public class StockService {
 
         stock.setAmount(amount);
         stock.setThresholdAmount(thresholdAmount);
-        stock.setStockWarning(stock.getAmount() >= stock.getThresholdAmount());
+        stock.setStockWarning(isStockWarning(stock));
         stock.setLastIncoming(lastIncoming);
         stock.setLastOutgoing(lastOutgoing);
         stock.setShelf(shelf);
@@ -63,12 +63,16 @@ public class StockService {
 
         stock.setAmount(amount);
         stock.setThresholdAmount(thresholdAmount);
-        stock.setStockWarning(stock.getAmount() <= stock.getThresholdAmount());
+        stock.setStockWarning(isStockWarning(stock));
         stock.setShelf(shelf);
         stock.setFloor(floor);
         stock.setProduct(product);
 
         return repository.save(stock);
+    }
+
+    private boolean isStockWarning(Stock stock) {
+        return stock.getAmount() <= stock.getThresholdAmount();
     }
 
     public void delete(Long id) {

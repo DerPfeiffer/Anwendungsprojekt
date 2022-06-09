@@ -1,23 +1,32 @@
 <h2>Anlage eines Produkts</h2>
-<form>
+<form [formGroup]="form">
   <mat-form-field>
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="product.name" name="name">
+    <input matInput formControlName="name" name="name">
+    <div *ngIf="name?.touched && name?.invalid" style="margin-top: 10px">
+      Bitte geben Sie einen Namen ein.
+    </div>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Preis</mat-label>
-    <input matInput [(ngModel)]="product.price" type="number" placeholder="0.00" name="preis">
+    <input matInput formControlName="price" type="number" placeholder="0.00" name="preis">
     <span matPrefix>€&nbsp;</span>
+    <div *ngIf="price?.touched && price?.invalid" style="margin-top: 10px">
+      Bitte geben Sie einen Preis ein.
+    </div>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Produzent</mat-label>
-    <mat-select [(ngModel)]="product.producer" name="producer">
+    <mat-select formControlName="producer" name="producer">
       <mat-option *ngFor="let producer of input" [value]="producer">
         {{producer.name}}
       </mat-option>
     </mat-select>
+    <div *ngIf="producer?.touched && producer?.invalid" style="margin-top: 10px">
+      Bitte wählen Sie einen Produzenten aus.
+    </div>
   </mat-form-field>
 
 

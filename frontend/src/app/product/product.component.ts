@@ -80,7 +80,7 @@ export class ProductComponent implements AfterViewInit {
     this._producerService.getAll().subscribe(data => {
       const dialog = this._dialog.open(CreateProductComponent, {data: data});
       dialog.afterClosed().subscribe((res) => {
-        if (res.event == "yes") {
+        if (res && res.event == "yes") {
           this._service.put(res.product).subscribe(() => {
             this.getAllProducts();
           })
@@ -108,7 +108,7 @@ export class ProductComponent implements AfterViewInit {
   deleteProduct(product: Product) {
     const dialog = this._dialog.open(DeleteProductComponent, {data: product});
     dialog.afterClosed().subscribe((res) => {
-      if (res.event == "yes") {
+      if (res && res.event == "yes") {
         this._service.delete(product).subscribe(() => {
           this.getAllProducts();
         })

@@ -1,46 +1,58 @@
 <h2>Anlage eines Bestands</h2>
-<form>
+<form [formGroup]="form">
   <mat-form-field>
     <mat-label>Produkt</mat-label>
-    <mat-select [(ngModel)]="stock.product" name="product">
+    <mat-select formControlName="product" name="product">
       <mat-option *ngFor="let product of input" [value]="product">
         {{product.name}} von {{product.producer.name}}
       </mat-option>
     </mat-select>
+    <div *ngIf="product?.touched && product?.invalid" style="margin-top: 10px">
+      Bitte geben Sie einen Namen ein.
+    </div>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Bestand</mat-label>
-    <input matInput [(ngModel)]="stock.amount" type="number" placeholder="0" name="Bestand">
+    <input matInput formControlName="amount" type="number" placeholder="0" name="Bestand">
     <span matSuffix> Stück</span>
+    <div *ngIf="amount?.touched && amount?.invalid" style="margin-top: 10px">
+      Bitte geben Sie einen Bestand ein.
+    </div>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Warngrenze</mat-label>
-    <input matInput [(ngModel)]="stock.thresholdAmount" type="number" placeholder="0" name="Warngrenze">
+    <input matInput formControlName="thresholdAmount" type="number" placeholder="0" name="Warngrenze">
     <span matSuffix> Stück</span>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Regal</mat-label>
-    <input matInput [(ngModel)]="stock.shelf" type="number" placeholder="0" name="Regal">
+    <input matInput formControlName="shelf" type="number" placeholder="0" name="Regal">
+    <div *ngIf="shelf?.touched && shelf?.invalid" style="margin-top: 10px">
+      Bitte geben Sie eine Regalnummer ein.
+    </div>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Stock</mat-label>
-    <input matInput [(ngModel)]="stock.floor" type="number" placeholder="0" name="Stock">
+    <input matInput formControlName="floor" type="number" placeholder="0" name="Stock">
+    <div *ngIf="floor?.touched && floor?.invalid" style="margin-top: 10px">
+      Bitte geben Sie einen Regalstock ein.
+    </div>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Letzter Wareneingang</mat-label>
-    <input matInput [matDatepicker]="lwe" [(ngModel)]="stock.lastIncoming" name="Letzter Wareneingang">
+    <input matInput [matDatepicker]="lwe" formControlName="lastIncoming" name="Letzter Wareneingang">
     <mat-datepicker-toggle matSuffix [for]="lwe"></mat-datepicker-toggle>
     <mat-datepicker #lwe></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Letzter Warenausgang</mat-label>
-    <input matInput [matDatepicker]="lwa" [(ngModel)]="stock.lastOutgoing" name="Letzter Warenausgang">
+    <input matInput [matDatepicker]="lwa" formControlName="lastOutgoing" name="Letzter Warenausgang">
     <mat-datepicker-toggle matSuffix [for]="lwa"></mat-datepicker-toggle>
     <mat-datepicker #lwa></mat-datepicker>
   </mat-form-field>

@@ -30,7 +30,7 @@ export class StockComponent implements AfterViewInit {
   key = "id";
   stock: Stock [] = [];
   dataSource = new MatTableDataSource(this.stock);
-  displayedColumns: string[] = ['id', 'product', 'amount', 'thresholdAmount', 'stockWarning', 'shelf', 'floor', 'lastIncoming', 'lastOutgoing', 'actions'];
+  displayedColumns: string[] = ['id', 'product', 'producer', 'amount', 'thresholdAmount', 'stockWarning', 'shelf', 'floor', 'lastIncoming', 'lastOutgoing', 'actions'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
@@ -175,7 +175,7 @@ export class StockComponent implements AfterViewInit {
       const productsAbleToAdd = data.filter(product => (this.stock.find(stockEntry => stockEntry.product.id == product.id)) ? false : true);
       const dialog = this._dialog.open(CreateStockComponent, {data: productsAbleToAdd});
       dialog.afterClosed().subscribe((res) => {
-        if (res.event == "yes") {
+        if (res && res.event == "yes") {
           console.log(res.stock);
           this._service.put(res.stock).subscribe(data => {
             if (data != null) {
@@ -215,4 +215,5 @@ export class StockComponent implements AfterViewInit {
       }
     })
   }
+
 }

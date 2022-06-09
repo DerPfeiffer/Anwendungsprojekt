@@ -33,10 +33,7 @@ export class StockService {
   }
 
   post(stock: Stock): Observable<any> {
-    let incomingISO = stock.lastIncoming ? DateUtils.toIsoString(stock.lastIncoming) : "";
-    let outgoingISO = stock.lastOutgoing ? DateUtils.toIsoString(stock.lastOutgoing): "";
-
-    const query = "id=" + stock.id + "&amount=" + stock.amount + "&thresholdAmount=" + stock.thresholdAmount + "&lastIncoming=" + incomingISO + "&lastOutgoing=" + outgoingISO + "&shelf=" + stock.shelf + "&floor=" + stock.floor + "&productId=" + stock.product.id;
+    const query = "id=" + stock.id + "&amount=" + stock.amount + "&thresholdAmount=" + stock.thresholdAmount + "&shelf=" + stock.shelf + "&floor=" + stock.floor + "&productId=" + stock.product.id;
     return this.http.post(this.base + "?" + query, {});
   }
 

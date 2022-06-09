@@ -6,6 +6,10 @@
   width: 5em;
 }
 
+#producerHeader {
+  width: 10em;
+}
+
 #amountHeader {
   width: 8em;
 }

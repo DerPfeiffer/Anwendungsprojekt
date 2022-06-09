@@ -29,7 +29,7 @@ export class ProductService {
   }
 
   post(product: Product): Observable<any> {
-    const query = "id=" + product.id + "&name=" + product.name + "&price=" + product.price + "&producerId=" + product.producer.id;
+    const query = "id=" + product.id + "&name=" + product.name + "&price=" + product.price + "&producerId=" + product.producer;
     return this.http.post(this.base + "?" + query, {});
   }
 

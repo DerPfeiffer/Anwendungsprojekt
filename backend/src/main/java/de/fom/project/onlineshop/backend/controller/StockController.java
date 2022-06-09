@@ -42,7 +42,7 @@ public class StockController {
         Stock stockByProduct = service.getByProduct(Long.parseLong(productId));
         if (stockByProduct == null) {
             int amountParsed = Integer.parseInt(amount);
-            int thresholdAmountParsed = Integer.parseInt(thresholdAmount);
+            int thresholdAmountParsed = thresholdAmount.equals("") ? 0 : Integer.parseInt(thresholdAmount);
             Timestamp lastincomingParsed = DateUtil.stringToDate(lastIncoming);
             Timestamp lastOutgoingParsed = DateUtil.stringToDate(lastOutgoing);
             int shelfParsed = Integer.parseInt(shelf);

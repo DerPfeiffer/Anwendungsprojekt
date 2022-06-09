@@ -1,6 +1,5 @@
-import {Component, Inject, OnInit, Optional} from '@angular/core';
+import {Component, Inject, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Producer} from "../../../interface/producer";
 import {Product} from "../../../interface/product";
 
 @Component({
@@ -15,11 +14,11 @@ export class DeleteProductComponent {
   }
 
   submit() {
-    this.dialogRef.close({event: 'yes'});
+    this.dialogRef.close({event: "yes"});
   }
 
   cancel() {
-    this.dialogRef.close({event: 'no'});
+    this.dialogRef.close({event: "no"});
   }
 
 }
