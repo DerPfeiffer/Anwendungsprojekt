@@ -167,8 +167,12 @@ export class StockComponent implements AfterViewInit {
     } else {
       buttonWarningsElement.classList.add(this.primaryClass);
       buttonAllElement.classList.remove(this.primaryClass);
-      this.dataSource.data = this.stock.filter(entry => entry.stockWarning);
+      this.dataSource.data = this.getStockDataWarnings();
     }
+  }
+
+  getStockDataWarnings() {
+    return this.stock.filter(entry => entry.stockWarning);
   }
 
   createStockEntry() {
