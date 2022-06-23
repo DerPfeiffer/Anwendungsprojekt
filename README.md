@@ -1,12 +1,36 @@
 # Anwendungsprojekt
 Repository für das Modul Anwendungsprojekt im 6. Semester an der FOM Hochschule fuer Oekonomie und Management
 
-# Systemvoraussetzungen
-- Gültige Java Version (Version 11 oder höher)
-- Gültige Maven Installation (Version 3.8.6 bevorzugt)
-- Gültige npm Installation (
-- Gültige Angular CLI Installation (
+# backend
+Das Backend bildet den Teil der Business-Logik ab und ist in Java implementiert. Die zugrundeliegende Technologie ist Spring. Für die Entwicklung wird eine gültige Java-Version (11 oder höher), sowie eine gültige Maven-Installation (Version 3.8.6 oder höher) benötigt.
+Für einen Start der Sourcen ist im Hauptverzeichnis der Befehl "mvn spring-boot:run" auszuführen. Builds werden über den Befehl "mvn clean install" durchgeführt und im target Ordner abgelegt.
 
-# Trennung in backend und frontend
-- Das Backend ist als Maven-Projekt realisiert und wird durch Spring-Boot bereitgestellt. Der Start erfolgt über den Befehl "mvn spring-boot:run". Das Backend ist unter "localhost:8080" zu erreichen.
-- Das Frontend wird durch Angular bereitgestellt. Der Start erfolgt über den Befehl "npm start". Das Frontend ist unter "localhost:4200" zu erreichen.
+# Frontend
+Das Frontend bildet die Ansicht der Applikation im Web und ist mit Typescript implementiert. Das zugrundeliegende Framework ist Angular. Für die Entwicklung gelten die gleichen Systemvoraussetzungen wie für den Betrieb.
+Für einen Start der Sourcen ist im Hauptverzeichnis der Befehl "ng serve" auszuführen.
+
+
+# Installation
+## Systemvoraussetzungen
+### Backend
+- Gültige Java Version (Version 11 oder höher)
+### Frontend
+- Gültige npm Installation (6.14.11 oder höher)
+- Gültige Node.js Installation (14.16.0 oder höher)
+- Gültige Angular CLI Installation (13.3.7 oder höher)
+- 
+## Starten der Applikationen
+Für die Backend-Applikation muss das Fat-Jar über den Befehl "java -jar Backend-<version>.jar" gestartet werden. Danach steht dieses bereit.
+Für die Frontend-Applikation muss in das Hauptverzeichnis der Anwendung navigiert werden. Dort muss dann der Befehl "ng serve" ausgeführt werden.
+
+# Konfiguration
+## backend
+### Entwicklung
+Die Konfiguration des Backends erfolgt in der Entwicklung über die Datei /src/main/resources/application.properties. Die Parameter werden von Spring bereitgestellt. Die hinterlegte Konfiguration wird als Basis-Konfiguration ausgeliefert.
+### Produktion
+Um die Parameter in der Produktion zu ändern, muss vor dem Start des Servers die Parameterdatei geändert werden. Dazu muss die jar-Datei geöffnet werden und die Werte in der Datei /BOOT-INF/classes/application.properties angepasst werden. 
+
+## frontend
+### Entwicklung
+Das Frontend nutzt die gängigen Angular-Parameter. Ein zusätzlicher Parameter wird durch eine Angular-Konstante abgebildet. Diese ist unter src/app/app.module.ts mit dem Namen HTTP_BASE_URL abgelegt und muss auf den Backend-Server, samt Port, verweisen. 
+### Produktion
