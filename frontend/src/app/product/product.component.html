@@ -27,8 +27,8 @@
       </ng-container>
 
       <ng-container matColumnDef="price">
-        <th id="priceHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Preis">Preis (€)</th>
-        <td mat-cell *matCellDef="let product" id="price" [matTooltip]="showTooltipIfOverflows(product.id, 'price')">{{parseFloat(product.price)}}</td>
+        <th id="priceHeader" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sortiere nach Preis">Preis</th>
+        <td mat-cell *matCellDef="let product" id="price" [matTooltip]="showTooltipIfOverflows(product.id, 'price')">{{parseFloat(product.price)}} €</td>
       </ng-container>
 
       <ng-container matColumnDef="producer.name">

@@ -36,7 +36,6 @@ public class StockController {
         return service.get(idParsed);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @PutMapping
     public Stock put(@RequestParam String amount, @RequestParam String thresholdAmount, @RequestParam String lastIncoming, @RequestParam String lastOutgoing, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
         Stock stockByProduct = service.getByProduct(Long.parseLong(productId));
@@ -55,9 +54,8 @@ public class StockController {
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @PostMapping
-    public Stock post(@RequestParam String id, @RequestParam String amount, @RequestParam String thresholdAmount, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) throws ParseException {
+    public Stock post(@RequestParam String id, @RequestParam String amount, @RequestParam String thresholdAmount, @RequestParam String shelf, @RequestParam String floor, @RequestParam String productId) {
         Long idParsed = Long.valueOf(id);
         Stock stockByProduct = service.getByProduct(Long.parseLong(productId));
         if (stockByProduct == null || (stockByProduct != null && stockByProduct.getId() == idParsed)) {
@@ -68,7 +66,7 @@ public class StockController {
             int floorParsed = Integer.parseInt(floor);
             Product productParsed = productController.get(productId);
 
-            return service.post(idParsed, amountParsed, thresholdAmountParsed, stockWarning, shelfParsed, floorParsed, productParsed);
+            return service.post(idParsed, amountParsed, thresholdAmountParsed, shelfParsed, floorParsed, productParsed);
         } else {
             return null;
         }

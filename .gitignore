@@ -1,6 +1,5 @@
 .idea/
 /backend/backend.iml
-/backend/target/
 /backend/db/
 /backend/.mvn/
 /db/

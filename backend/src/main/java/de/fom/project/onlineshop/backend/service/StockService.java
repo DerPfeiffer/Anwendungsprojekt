@@ -7,10 +7,8 @@ import de.fom.project.onlineshop.backend.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -50,7 +48,7 @@ public class StockService {
         return repository.save(stock);
     }
 
-    public Stock post(Long id, int amount, int thresholdAmount, boolean stockWarning, int shelf, int floor, Product product) {
+    public Stock post(Long id, int amount, int thresholdAmount, int shelf, int floor, Product product) {
         Stock stock = get(id);
 
         // Bestand ist höher als vorher, also hat Wareneingang stattgefunden

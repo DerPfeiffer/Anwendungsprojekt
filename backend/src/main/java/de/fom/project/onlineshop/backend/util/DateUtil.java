@@ -8,10 +8,6 @@ public class DateUtil {
 
     private final static SimpleDateFormat outFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 
-    public static String dateToString(Timestamp timestamp) {
-        return outFormat.format(timestamp);
-    }
-
     public static Timestamp stringToDate(String dateString) throws ParseException {
         if(!dateString.isEmpty()) {
             return new Timestamp(outFormat.parse(dateString).getTime());

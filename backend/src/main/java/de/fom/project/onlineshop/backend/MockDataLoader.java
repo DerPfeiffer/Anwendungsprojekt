@@ -55,23 +55,21 @@ public class MockDataLoader implements ApplicationRunner {
         LOG.info("Start Loading MockData");
 
         LOG.info("Start Loading Producer");
-        List<Producer> producer = mapper.readValue(producerMockDataFile.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Producer.class));
+        List<Producer> producer = mapper.readValue(producerMockDataFile.getInputStream(), mapper.getTypeFactory().constructCollectionType(List.class, Producer.class));
         producerRepository.saveAll(producer);
         LOG.info("Finished Loading Producer");
 
         LOG.info("Start Loading Product");
-        List<Product> products = mapper.readValue(productMockDataFile.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Product.class));
+        List<Product> products = mapper.readValue(productMockDataFile.getInputStream(), mapper.getTypeFactory().constructCollectionType(List.class, Product.class));
         productRepository.saveAll(products);
         LOG.info("Finished Loading Product");
 
         LOG.info("Start Loading Stock");
-        List<Stock> stocks = mapper.readValue(stockMockDataFile.getFile(), mapper.getTypeFactory().constructCollectionType(List.class, Stock.class));
+        List<Stock> stocks = mapper.readValue(stockMockDataFile.getInputStream(), mapper.getTypeFactory().constructCollectionType(List.class, Stock.class));
         stockRepository.saveAll(stocks);
         LOG.info("Finished Loading Stock");
 
-
         LOG.info("Finished Loading MockData");
-
     }
 
     public void deleteData() {
