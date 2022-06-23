@@ -10,7 +10,7 @@
     </parent>
     <groupId>de.fom.project.onlineshop</groupId>
     <artifactId>backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>backend</name>
     <description>Backend für den Online-Shop im Modul &quot;Anwendungsprojekt&quot;</description>
     <properties>
