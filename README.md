@@ -18,7 +18,7 @@ Für einen Start der Sourcen ist im Hauptverzeichnis der Befehl "ng serve" auszu
 - Gültige npm Installation (6.14.11 oder höher)
 - Gültige Node.js Installation (14.16.0 oder höher)
 - Gültige Angular CLI Installation (13.3.7 oder höher)
-- 
+
 ## Starten der Applikationen
 Für die Backend-Applikation muss das Fat-Jar über den Befehl "java -jar Backend-<version>.jar" gestartet werden. Danach steht dieses bereit.
 Für die Frontend-Applikation muss in das Hauptverzeichnis der Anwendung navigiert werden. Dort muss dann der Befehl "ng serve" ausgeführt werden.
@@ -34,3 +34,4 @@ Um die Parameter in der Produktion zu ändern, muss vor dem Start des Servers di
 ### Entwicklung
 Das Frontend nutzt die gängigen Angular-Parameter. Ein zusätzlicher Parameter wird durch eine Angular-Konstante abgebildet. Diese ist unter src/app/app.module.ts mit dem Namen HTTP_BASE_URL abgelegt und muss auf den Backend-Server, samt Port, verweisen. 
 ### Produktion
+Das Vorgehen für die Produktion richtet sich nach dem Entwicklungsvorgehen.
